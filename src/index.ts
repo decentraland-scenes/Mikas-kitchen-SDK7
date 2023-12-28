@@ -2,7 +2,7 @@ import {
   ColliderLayer, engine, Animator,
   AudioSource, VisibilityComponent, Material,
   VideoPlayer, pointerEventsSystem,
-  AvatarAttach, GltfContainer, PointerEvents, PointerEventType, TextShape, Transform
+  AvatarAttach, GltfContainer, PointerEvents, Tween, PointerEventType, TextShape, Transform
 } from '@dcl/sdk/ecs'
 import { Vector3, Quaternion } from '@dcl/sdk/math'
 import { BeerType, IngredientType, SyncEntityIDs } from './definitions'
@@ -58,12 +58,38 @@ export function main() {
     fontSize: 3,
   })
 
+
   //Ingredient expenders
   const noodles_expender = engine.getEntityOrNullByName("ExpenderNoodles")
   const roll_expender = engine.getEntityOrNullByName("ExpenderRolls")
-
   const noodles_button = engine.getEntityOrNullByName("Noodle Button")
   const roll_button = engine.getEntityOrNullByName("Roll Button")
+
+  // TODO: HANDLE IDS FOR MULTIPLAYER MODE
+
+  if (noodles_expender && roll_expender && noodles_button && roll_button) {
+    const noodles_button_events = getTriggerEvents(noodles_button)
+    noodles_button_events.on(TriggerType.ON_CLICK, () => {
+      console.log("BUTTON WAS PRESSED!!")
+      const startPosition = Vector3.add(Transform.get(noodles_expender).position, Vector3.create(0, 0.7, 0))
+      createIngredient(IngredientType.Noodles, startPosition, true)
+
+    })
+
+    const roll_button_events = getTriggerEvents(roll_button)
+    roll_button_events.on(TriggerType.ON_CLICK, () => {
+      console.log("BUTTON WAS PRESSED!!")
+      const startPosition = Vector3.add(Transform.get(roll_expender).position, Vector3.create(0, 0.7, 0))
+      createIngredient(IngredientType.SushiRoll, startPosition, true)
+
+    })
+
+  }
+
+
+
+
+
 
   // Pots
   const pot1 = engine.getEntityOrNullByName("Pot1")
@@ -143,7 +169,7 @@ export function main() {
   }
 
 
-
+  // FOR TESTING
   createIngredient(IngredientType.Noodles, Vector3.create(4.4, 0.8, 1.5))
   createIngredient(IngredientType.SushiRoll, Vector3.create(6.4, 0.8, 1.5))
   createIngredient(IngredientType.SlicedSushi, Vector3.create(8.4, 0.8, 1.5))

@@ -11,7 +11,9 @@ import {
   MeshRenderer,
   AudioSource,
   ColliderLayer,
-  pointerEventsSystem
+  pointerEventsSystem,
+  Tween,
+  EasingFunction
 } from '@dcl/sdk/ecs'
 import { Vector3, Quaternion } from '@dcl/sdk/math'
 import { BeerGlass, BeerType, CuttingBoard, getTapData, GrabableObjectComponent, IngredientType, SyncEntityIDs, TapBase, TapComponent } from '../definitions'
@@ -55,7 +57,7 @@ export function instanceBeer(entity: Entity, id: SyncEntityIDs) {
 // INGREDIENT
 
 
-export function createIngredient(ingredient: IngredientType, position: Vector3) {
+export function createIngredient(ingredient: IngredientType, position: Vector3, fall?: boolean) {
   const entity = engine.addEntity()
 
   let model = ""
@@ -101,11 +103,25 @@ export function createIngredient(ingredient: IngredientType, position: Vector3) 
     ]
   })
 
-  // syncEntity(
-  //   entity,
-  //   [AudioSource.componentId, Transform.componentId, GrabableObjectComponent.componentId],
-  //   id
-  // )
+  if (fall) {
+    Tween.create(entity, {
+      mode: Tween.Mode.Move({
+        start: position,
+        end: Vector3.add(position, Vector3.create(0, -0.7, 0)),
+      }),
+      duration: 1000,
+      easingFunction: EasingFunction.EF_LINEAR
+    })
+  }
+
+  syncEntity(
+    entity,
+    [AudioSource.componentId, Transform.componentId, GrabableObjectComponent.componentId, Tween.componentId],
+    //  id
+  )
+  // TODO: HANDLE IDS FOR MULTIPLAYER
+
+  return ingredient
 
 }
 
@@ -204,7 +220,8 @@ export function createCuttingBoard(position: Vector3, id: SyncEntityIDs) {
 
   const CutterParent = engine.addEntity()
   Transform.create(CutterParent, {
-    position: position
+    position: position,
+    rotation: Quaternion.fromEulerDegrees(0, 0, 0)
   })
 
   syncEntity(CutterParent, [], id + 100)

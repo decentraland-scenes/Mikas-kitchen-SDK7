@@ -44,6 +44,7 @@ export function pickFood(pot: Entity) {
   const potData = PotData.getMutable(pot)
   if (potData && potData.hasIngredient && potData.attachedEntity !== undefined) {
 
+    console.log("PICKING UP FROM POT")
     pickUpItem(potData.attachedEntity)
     potData.hasIngredient = false
     //potData.attachedEntity = undefined

@@ -38,7 +38,7 @@ export function pickingGlassSystem() {
         //   parent: hitParentEntity
         // })
         console.log("DROPPED ON TAP")
-        removeParent(pickedUpChild)
+        //removeParent(pickedUpChild)
         parentEntity(pickedUpChild, hitParentEntity)
         drop = true
       } else if (hitParentEntity && CuttingBoard.has(hitParentEntity)) {
@@ -46,7 +46,7 @@ export function pickingGlassSystem() {
         console.log("DROPPED ON CUTTING BOARD")
         const board = CuttingBoard.getMutable(hitParentEntity)
         if (!board || !board.hasRoll || !board.modelEntity) {
-          removeParent(pickedUpChild)
+          //removeParent(pickedUpChild)
           parentEntity(pickedUpChild, hitParentEntity)
           drop = true
 
@@ -63,7 +63,7 @@ export function pickingGlassSystem() {
         console.log("DROPPED ON POT")
         const pot = PotData.getMutable(hitEntity)
         if (pot && !pot.hasIngredient) {
-          removeParent(pickedUpChild)
+          //removeParent(pickedUpChild)
           parentEntity(pickedUpChild, hitEntity)
           pot.hasIngredient = true
           pot.attachedEntity = pickedUpChild

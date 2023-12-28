@@ -1130,6 +1130,21 @@
         "protocolBuffer": "PBPointerEvents"
       },
       "data": {
+        "513": {
+          "json": {
+            "pointerEvents": [
+              {
+                "eventType": 1,
+                "eventInfo": {
+                  "button": 3,
+                  "hoverText": "Interact",
+                  "maxDistance": 10,
+                  "showFeedback": false
+                }
+              }
+            ]
+          }
+        },
         "522": {
           "json": {
             "pointerEvents": [
@@ -1280,7 +1295,7 @@
         "serializationType": "map"
       },
       "data": {
-        "530": {
+        "513": {
           "json": {
             "gizmo": 0
           }
