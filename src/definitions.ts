@@ -65,6 +65,9 @@ export enum IngredientType {
   SlicedSushi,
   Trash,
   BeerGlass,
+  YellowBeer,
+  RedBeer,
+  GreenBeer,
 }
 
 export enum SpeechBubbleType {
@@ -103,7 +106,7 @@ export function getTapData(tapBeerType: BeerType) {
  */
 
 export const BeerGlass = engine.defineComponent('BeerGlass', {
-  beingFilled: Schemas.Boolean,
+  //beingFilled: Schemas.Boolean,
   filled: Schemas.Boolean,
   beerType: Schemas.EnumNumber<BeerType>(BeerType, BeerType.NONE),
   drinking: Schemas.Boolean

@@ -134,10 +134,6 @@ export function pickingGlassSystem() {
 
 
       if (grabbable.beingProcessed) { return }
-      if (grabbable.type === IngredientType.BeerGlass) {
-        const glass = BeerGlass.get(entity)
-        if (glass.beingFilled) { return }
-      }
 
       pickUpItem(entity)
 

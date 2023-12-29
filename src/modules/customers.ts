@@ -43,11 +43,31 @@ const customerTrashMessages = [
   "Garbage, don't care what kind"
 ]
 
-const customerBeerMessages = [
-  'I want a cold beer!',
-  'I heard you do craft beer, gimme!',
-  'Beer! A nice cold one!',
+const customerEmptyBeerMessages = [
+  'An empty beer glass. So it looks like I was waiting long',
+  'Just a glass, nothing in it. Feeling existential.',
+  'Empty glass. All I can afford.',
 ]
+
+const customerYellowBeerMessages = [
+  'I want a cold regular beer!',
+  'I heard you do craft beer, gimme a yellow!',
+  'Beer! A nice cold normal one!',
+]
+
+const customerRedBeerMessages = [
+  'I want a RED beer!',
+  'Red beer. Im a bit of a hipster!',
+  'Beer red like the blood of my enemies! lol',
+]
+
+
+const customerGreenBeerMessages = [
+  'I like weird stuff, green beer!',
+  'Green Beer. Dont care about the taste, want a cool pic for insagram',
+  'Beer! A nice cold green one!',
+]
+
 
 const customerLookingMessage = [
   'Im just here to watch',
@@ -167,7 +187,16 @@ export function CreateCustomer() {
       messages = customerTrashMessages
       break
     case 5:
-      messages = customerBeerMessages
+      messages = customerEmptyBeerMessages
+      break
+    case 6:
+      messages = customerYellowBeerMessages
+      break
+    case 7:
+      messages = customerRedBeerMessages
+      break
+    case 8:
+      messages = customerGreenBeerMessages
       break
     default:
       messages = customerLookingMessage
@@ -217,7 +246,6 @@ export function CustomerSystem(dt: number) {
         RemoveProgressBar(customerData.progressBar)
 
       }
-
     }
 
     if (customerData.receivedDish && customerData.waitingTimer > 0) {
@@ -227,7 +255,7 @@ export function CustomerSystem(dt: number) {
 
         engine.removeEntityWithChildren(entity)
 
-
+        CreateCustomer()
 
 
       }
