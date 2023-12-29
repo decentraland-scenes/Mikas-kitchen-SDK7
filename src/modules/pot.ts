@@ -2,6 +2,7 @@ import { engine, Animator, Entity, GltfContainer, PointerEvents, InputAction, Po
 import { PotData, SoupState, Cooking, SyncEntityIDs, IngredientType, GrabableObjectComponent } from '../definitions'
 import { pickUpItem } from "./pickAndDrop";
 import { syncEntity, parentEntity } from '@dcl/sdk/network'
+import { CreateProgressBar } from "./progressBars";
 
 
 const COOKED_AFTER: number = 5
@@ -60,9 +61,13 @@ export function pickFood(pot: Entity) {
 
 export function startCooking(pot: Entity) {
 
+  if (Cooking.has(pot) && Cooking.get(pot).active) return
+
+
+
   Cooking.createOrReplace(pot)
 
-  // todo progress bar
+  CreateProgressBar(pot, 1, 0, true)
 
 }
 

@@ -5,7 +5,7 @@ import {
   AvatarAttach, GltfContainer, PointerEvents, Tween, PointerEventType, TextShape, Transform
 } from '@dcl/sdk/ecs'
 import { Vector3, Quaternion } from '@dcl/sdk/math'
-import { BeerType, IngredientType, SyncEntityIDs } from './definitions'
+import { BeerType, IngredientType, SyncEntityIDs, SpeechBubbleType } from './definitions'
 import { pickingGlassSystem } from './modules/pickAndDrop'
 import { createCuttingBoard, createIngredient, createTap, instanceBeer } from './modules/factory'
 import { tapPumpSystem } from './modules/tap'
@@ -15,6 +15,9 @@ import { instancePot, startCooking, cookSystem } from './modules/pot'
 import { getTriggerEvents, getActionEvents } from '@dcl/asset-packs/dist/events'
 import { TriggerType } from '@dcl/asset-packs'
 import { syncEntity } from '@dcl/sdk/network'
+import { ProgressBarUpdate } from './modules/progressBars'
+import { createSpeechBubble } from './modules/speechBubble'
+import { CustomerSystem, CreateCustomer } from './modules/customers'
 
 // You can remove this if you don't use any asset packs
 initAssetPacks(engine, pointerEventsSystem, {
@@ -97,6 +100,7 @@ export function main() {
   const pot1_button = engine.getEntityOrNullByName("Pot1 Button")
   const pot2_button = engine.getEntityOrNullByName("Pot2 Button")
 
+
   if (pot1 && pot2 && pot1_button && pot2_button) {
     instancePot(pot1, SyncEntityIDs.POT1)
     instancePot(pot2, SyncEntityIDs.POT2)
@@ -111,7 +115,11 @@ export function main() {
     pot2_button_events.on(TriggerType.ON_CLICK, () => {
       console.log("BUTTON WAS PRESSED!!")
       startCooking(pot2)
+
+      //createSpeechBubble(pot1, "I'm a pot MUAHAHA", 1, SpeechBubbleType.Bad)
     })
+
+
   }
 
 
@@ -175,9 +183,15 @@ export function main() {
   createIngredient(IngredientType.SlicedSushi, Vector3.create(8.4, 0.8, 1.5))
   createIngredient(IngredientType.CookedNoodles, Vector3.create(10.4, 0.8, 1.5))
 
+  CreateCustomer()
+  CreateCustomer()
+
+
   engine.addSystem(pickingGlassSystem)
   engine.addSystem(tapPumpSystem)
   engine.addSystem(cookSystem)
+  engine.addSystem(ProgressBarUpdate)
+  engine.addSystem(CustomerSystem)
 
   // UI with GitHub link
   setupUi()

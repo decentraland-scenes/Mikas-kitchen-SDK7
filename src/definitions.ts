@@ -1,5 +1,5 @@
-import { Vector3 } from '@dcl/sdk/math'
-import { engine, Schemas } from '@dcl/sdk/ecs'
+import { Vector3, Color4 } from '@dcl/sdk/math'
+import { engine, Schemas, } from '@dcl/sdk/ecs'
 /**
  * Types
  */
@@ -64,7 +64,13 @@ export enum IngredientType {
   CookedNoodles,
   SlicedSushi,
   Trash,
-  BeerGlass
+  BeerGlass,
+}
+
+export enum SpeechBubbleType {
+  Neutral,
+  Good,
+  Bad
 }
 
 
@@ -184,3 +190,65 @@ export const CuttingBoard = engine.defineComponent('CuttingBoard', {
   totalCutTime: 0.7
 })
 
+
+
+export const ProgressBar = engine.defineComponent('ProgressBar', {
+  active: Schemas.Boolean,
+  ratio: Schemas.Number,
+  yellowWarning: Schemas.Number,
+  redWarning: Schemas.Number,
+  fullLength: Schemas.Number,
+  movesUp: Schemas.Boolean,
+  color: Schemas.Color4,
+  speed: Schemas.Number,
+  parent: Schemas.Entity
+}, {
+  active: true,
+  ratio: 0,
+  yellowWarning: 0.5,
+  redWarning: 0.75,
+  fullLength: 1,
+  movesUp: true,
+  color: Color4.Green(),
+  speed: 1,
+  //parent: Schemas.Entity
+})
+
+
+
+export const CustomerData = engine.defineComponent('CustomerData', {
+  dish: Schemas.EnumNumber<IngredientType>(IngredientType, IngredientType.Noodles),
+  message: Schemas.String,
+  speechBubble: Schemas.Entity,
+  receivedDish: Schemas.Boolean, // TODO: true to force the 1st initialization??
+  //plate: CustomerPlate
+  seatNumber: Schemas.Number,
+  timeBeforeLeaving: Schemas.Number,
+  timeBeforeEntering: Schemas.Number,
+  waitingTimer: Schemas.Number,
+  progressBar: Schemas.Entity
+}, {
+  receivedDish: false,
+  timeBeforeLeaving: 30,
+  timeBeforeEntering: 10,
+  waitingTimer: 30,
+})
+
+
+// export const CustomerPlate = engine.defineComponent('CustomerPlate', {
+//   ownerCustomer: CustomerData,
+//   hasIngredient: Schemas.Boolean,
+//   progressBar: Schemas.Entity,
+//   attachedEntity: Schemas.Entity || undefined
+// }, {
+//   state: SoupState.Empty,
+//   hasIngredient: false,
+//   attachedEntity: undefined,
+//   //progressBar: 0,
+// })
+
+// @Component('customerPlate')
+// export class CustomerPlate {
+//   ownerCustomer: CustomerData
+//   dish: IngredientType
+// }

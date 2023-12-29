@@ -10,11 +10,13 @@ import {
   Animator
 } from '@dcl/sdk/ecs'
 import { Vector3, Quaternion } from '@dcl/sdk/math'
-import { BeerGlass, CuttingBoard, PotData, SoupState, GrabableObjectComponent, IngredientType, PickedUp, TapBase } from '../definitions'
+import { BeerGlass, CuttingBoard, PotData, SoupState, GrabableObjectComponent, IngredientType, PickedUp, TapBase, CustomerData } from '../definitions'
 import { playSound } from './factory'
 import { currentPlayerId, getPlayerPosition } from './helpers'
 import { syncEntity, parentEntity, getParent, removeParent, getChildren } from '@dcl/sdk/network'
 import { ruinFood } from './cuttingBoard'
+import { RemoveProgressBar } from './progressBars'
+import { deliverOrder } from './customers'
 
 export function pickingGlassSystem() {
   // DROP
@@ -77,8 +79,8 @@ export function pickingGlassSystem() {
         }
 
       } else {
-        // Table
-        // customer
+        // Table or  customer
+
         // Only it's allowed to hold the beer in surface parallel to floor
 
         const diff = Vector3.subtract(Vector3.Up(), tryToDropCommand.hit?.normalHit || Vector3.Zero())
@@ -91,9 +93,10 @@ export function pickingGlassSystem() {
             parent: undefined
           })
           drop = true
+
+          checkNearCustomer(pickedUpChild)
         }
       }
-
 
 
 
@@ -171,6 +174,8 @@ export function pickUpItem(entity: Entity) {
       pot.hasIngredient = false
       //pot.attachedEntity = undefined
       pot.state = SoupState.Empty
+
+      RemoveProgressBar(pot.progressBar)
     }
   }
 
@@ -185,3 +190,28 @@ export function pickUpItem(entity: Entity) {
   }
 
 }
+
+
+export function checkNearCustomer(entity: Entity) {
+
+  const itemTransform = Transform.get(entity)
+  let closestCustomer = null
+  let closestDistance = 1.5
+
+  for (const [entity, customer, customerTransform] of engine.getEntitiesWith(CustomerData, Transform)) {
+    const diff = Vector3.length(Vector3.subtract(itemTransform.position, customerTransform.position))
+    if (diff < closestDistance) {
+      closestCustomer = entity
+      closestDistance = diff
+    }
+  }
+
+  if (closestCustomer) {
+
+    const itemData = GrabableObjectComponent.get(entity)
+
+
+    deliverOrder(itemData.type, closestCustomer)
+  }
+}
+

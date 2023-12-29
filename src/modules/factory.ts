@@ -109,7 +109,7 @@ export function createIngredient(ingredient: IngredientType, position: Vector3, 
         start: position,
         end: Vector3.add(position, Vector3.create(0, -0.7, 0)),
       }),
-      duration: 1000,
+      duration: 500,
       easingFunction: EasingFunction.EF_LINEAR
     })
   }
