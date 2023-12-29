@@ -36,9 +36,8 @@ export function pickingGlassSystem() {
 
       // If there is a tap base (the collider)
       if (hitParentEntity && TapBase.getOrNull(hitParentEntity)) {
-        // Transform.createOrReplace(pickedUp.child, {
-        //   parent: hitParentEntity
-        // })
+        Transform.getMutable(pickedUpChild).rotation = Quaternion.Zero()
+        Transform.getMutable(pickedUpChild).position = Vector3.Zero()
         console.log("DROPPED ON TAP")
         //removeParent(pickedUpChild)
         parentEntity(pickedUpChild, hitParentEntity)
@@ -51,6 +50,8 @@ export function pickingGlassSystem() {
           //removeParent(pickedUpChild)
           parentEntity(pickedUpChild, hitParentEntity)
           drop = true
+          Transform.getMutable(pickedUpChild).rotation = Quaternion.Zero()
+          Transform.getMutable(pickedUpChild).position = Vector3.Zero()
 
           board.hasRoll = true
           board.rollChild = pickedUpChild

@@ -41,15 +41,15 @@ export type TapDataType = {
   name: string
 }
 
-export enum TileType {
-  Floor,
-  Shelf,
-  Expender,
-  Trash,
-  Pot,
-  Cutter,
-  Plate,
-}
+// export enum TileType {
+//   Floor,
+//   Shelf,
+//   Expender,
+//   Trash,
+//   Pot,
+//   Cutter,
+//   Plate,
+// }
 
 export enum SoupState {
   Empty,

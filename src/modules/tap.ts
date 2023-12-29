@@ -3,10 +3,13 @@ import { Scalar } from '@dcl/sdk/math'
 import { BeerGlass, BeerType, getTapData, TapBase, TapComponent } from '../definitions'
 import { playSound } from './factory'
 import { getPlayerPosition } from './helpers'
+import { getParent } from '@dcl/sdk/network'
 
 function getBeerBehindTap(beerType: BeerType) {
-  for (const [glassEntity, _1, _2, glassTransform] of engine.getEntitiesWith(BeerGlass, Animator, Transform)) {
-    if (glassTransform.parent && TapBase.getOrNull(glassTransform.parent)?.beerType === beerType) {
+  for (const [glassEntity] of engine.getEntitiesWith(BeerGlass)) {
+
+    const glassParent = getParent(glassEntity)
+    if (glassParent && TapBase.getOrNull(glassParent)?.beerType === beerType) {
       return glassEntity
     }
   }

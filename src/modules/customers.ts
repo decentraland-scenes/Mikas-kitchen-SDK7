@@ -49,6 +49,13 @@ const customerBeerMessages = [
   'Beer! A nice cold one!',
 ]
 
+const customerLookingMessage = [
+  'Im just here to watch',
+  'I dont want anything. Just here to make you feel uncomfortable.',
+  'Making a documentary, keep working as if Im not here',
+]
+
+
 
 const customerCorrectDishMessages = [
   'Excellent!',
@@ -138,7 +145,6 @@ export function CreateCustomer() {
 
   const randomTime = Scalar.randomRange(3, 6)
 
-
   const progressBar = CreateProgressBar(customer, 1.3, 180, false, 0.1)
 
   const dish = Math.floor(Scalar.randomRange(0, Object.keys(IngredientType).length))
@@ -164,7 +170,7 @@ export function CreateCustomer() {
       messages = customerBeerMessages
       break
     default:
-      messages = customerCookedNoodleMessages
+      messages = customerLookingMessage
       break
   }
 

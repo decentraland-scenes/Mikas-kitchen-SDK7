@@ -50,7 +50,7 @@ export function cutSushi(entity: Entity, modelEntity: Entity) {
 
   utils.timers.setTimeout(() => {
     boardData.cutting = false
-  }, 1000)
+  }, 500)
 
 }
 
