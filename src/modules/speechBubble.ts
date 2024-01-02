@@ -1,15 +1,13 @@
 import { Entity, Material, engine, Transform, TextShape, MeshRenderer, TextAlignMode } from "@dcl/sdk/ecs";
 import { SpeechBubbleType } from "../definitions";
 import { Color4, Vector3, Quaternion } from "@dcl/ecs-math";
-import { syncEntity, parentEntity } from '@dcl/sdk/network'
+import { syncEntity, parentEntity, getChildren } from '@dcl/sdk/network'
 import { getSyncId } from "./helpers";
 
 const bubble1Texture = Material.Texture.Common({
   src: 'assets/textures/bubble.png',
 })
-// const bubble2Texture = Material.Texture.Common({
-//   src: 'assets/textures/bubble2.jpg',
-// })
+
 const bubble3Texture = Material.Texture.Common({
   src: 'assets/textures/bubble3.png',
 })
@@ -53,13 +51,9 @@ export function createSpeechBubble(parent: Entity, text: string, height?: number
       break
   }
 
-  const goodBubbleMaterial = Material.setBasicMaterial(background, {
+  Material.setBasicMaterial(background, {
     diffuseColor: color,
     texture: texture,
-    //alphaTexture: texture,
-    //specularIntensity: 0,
-    //metallic: 0,
-    //roughness: 1,
 
   })
 
@@ -97,6 +91,52 @@ export function createSpeechBubble(parent: Entity, text: string, height?: number
 
   return bubbleParent
 }
+
+
+export function updateSpeechBubble(bubble: Entity, text: string, bubbleType?: SpeechBubbleType) {
+
+  const children = Array.from(getChildren(bubble))
+  let backgroundEntity: Entity | undefined = undefined
+  let textEntity: Entity | undefined = undefined
+
+  for (const ent of children) {
+    if (TextShape.has(ent)) {
+      textEntity = ent
+    }
+    if (MeshRenderer.has(ent)) {
+      backgroundEntity = ent
+    }
+  }
+
+  if (!backgroundEntity || !textEntity) { return }
+
+
+  let texture = bubble1Texture
+  let color = Color4.Gray()
+
+  switch (bubbleType) {
+    case SpeechBubbleType.Good:
+      texture = bubble3Texture
+      color = Color4.Green()
+      break
+    case SpeechBubbleType.Bad:
+      texture = bubble3Texture
+      color = Color4.Red()
+      break
+  }
+
+  Material.setBasicMaterial(backgroundEntity, {
+    diffuseColor: color,
+    texture: texture,
+
+  })
+
+  TextShape.getMutable(textEntity).text = text
+
+
+}
+
+
 
 
 export function RemoveSpeechBubble(bubble: Entity) {

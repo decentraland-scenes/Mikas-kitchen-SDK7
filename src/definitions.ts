@@ -56,6 +56,10 @@ export enum SyncEntityIDs {
   PBAR5_B = 49,
   PBAR6_A = 50,
   PBAR6_B = 51,
+  CUSTOMER1 = 52,
+  CUSTOMER2 = 53,
+  CUSTOMER3 = 54,
+  CUSTOMER4 = 55,
   // TABLES = 19
 }
 

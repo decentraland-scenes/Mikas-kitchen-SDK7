@@ -2,7 +2,7 @@ import { GltfContainer, Animator, Transform, engine, Entity, TextShape } from "@
 import { Vector3, Scalar, Quaternion, Color4 } from '@dcl/sdk/math'
 import { ProgressBar, CustomerData, IngredientType, SpeechBubbleType, BeerGlass, BeerType, GameData } from "../definitions";
 import { CreateProgressBar, RemoveProgressBar } from "./progressBars";
-import { RemoveSpeechBubble, createSpeechBubble } from "./speechBubble";
+import { RemoveSpeechBubble, createSpeechBubble, updateSpeechBubble } from "./speechBubble";
 import { syncEntity, parentEntity } from '@dcl/sdk/network'
 import * as utils from '@dcl-sdk/utils'
 import { getPlayerPosition, playSound } from "./helpers";
@@ -334,9 +334,9 @@ export function deliverOrder(dishType: number, customer: Entity, dish?: Entity) 
   }
 
 
-  if (customerData.speechBubble) {
-    RemoveSpeechBubble(customerData.speechBubble)
-  }
+  // if (customerData.speechBubble) {
+  //   RemoveSpeechBubble(customerData.speechBubble)
+  // }
 
 
   const [gameEntities] = engine.getEntitiesWith(GameData)
@@ -352,8 +352,10 @@ export function deliverOrder(dishType: number, customer: Entity, dish?: Entity) 
     const message = customerCorrectDishMessages[Math.floor(Scalar.randomRange(0, customerCorrectDishMessages.length))]
     customerData.message = message
 
-    const speechBubble = createSpeechBubble(customer, message, 2.3, SpeechBubbleType.Good)
-    customerData.speechBubble = speechBubble
+    updateSpeechBubble(customerData.speechBubble, message, SpeechBubbleType.Good)
+
+    // const speechBubble = createSpeechBubble(customer, message, 2.3, SpeechBubbleType.Good)
+    // customerData.speechBubble = speechBubble
 
   } else {
     // Wrong dish
@@ -362,8 +364,10 @@ export function deliverOrder(dishType: number, customer: Entity, dish?: Entity) 
     const message = customerWrongDishMessages[Math.floor(Scalar.randomRange(0, customerWrongDishMessages.length))]
     customerData.message = message
 
-    const speechBubble = createSpeechBubble(customer, message, 2.3, SpeechBubbleType.Bad)
-    customerData.speechBubble = speechBubble
+    updateSpeechBubble(customerData.speechBubble, message, SpeechBubbleType.Bad)
+
+    // const speechBubble = createSpeechBubble(customer, message, 2.3, SpeechBubbleType.Bad)
+    // customerData.speechBubble = speechBubble
   }
 
 
