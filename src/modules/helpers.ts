@@ -1,6 +1,7 @@
-import { Transform, engine, executeTask, Entity, Animator } from '@dcl/sdk/ecs'
+import { Transform, engine, executeTask, Entity, Animator, AudioSource } from '@dcl/sdk/ecs'
 import { Vector3 } from '@dcl/sdk/math'
 import { getUserData } from '~system/UserIdentity'
+import { DynamicSyncId } from '../definitions'
 
 export function getPlayerPosition() {
   return Transform.getOrNull(engine.PlayerEntity)?.position || Vector3.create()
@@ -24,4 +25,48 @@ export function* getEntitiesWithParent(parent: Entity) {
 
 export function getEntityParent(entity: Entity) {
   return Transform.getOrNull(entity)?.parent || engine.RootEntity
+}
+
+
+
+
+export function playSound(audio: string, loop: boolean = false, position?: Vector3) {
+  const entity = engine.addEntity()
+  AudioSource.create(entity, {
+    audioClipUrl: audio,
+    loop,
+    playing: true
+  })
+
+  Transform.create(entity, {
+    position
+  })
+
+  return entity
+}
+
+
+
+export function getSyncId(entity: Entity) {
+
+  let takenIds: number[] = []
+
+  const syncedEntites = engine.getEntitiesWith(DynamicSyncId)
+
+  for (const [ent] of syncedEntites) {
+
+    takenIds.push(DynamicSyncId.get(ent).id)
+  }
+
+  let id = 1000
+  while (takenIds.includes(id)) {
+    id++
+  }
+
+  console.log("CREATING SYNC ID", id)
+
+  DynamicSyncId.create(entity, { id: id })
+
+  return id
+
 }

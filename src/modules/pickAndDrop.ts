@@ -11,12 +11,13 @@ import {
 } from '@dcl/sdk/ecs'
 import { Vector3, Quaternion } from '@dcl/sdk/math'
 import { BeerGlass, CuttingBoard, PotData, SoupState, GrabableObjectComponent, IngredientType, PickedUp, TapBase, CustomerData } from '../definitions'
-import { playSound } from './factory'
+import { playSound } from './helpers'
 import { currentPlayerId, getPlayerPosition } from './helpers'
 import { syncEntity, parentEntity, getParent, removeParent, getChildren } from '@dcl/sdk/network'
 import { ruinFood, switchToCutMode, switchToEmpty } from './cuttingBoard'
 import { RemoveProgressBar } from './progressBars'
 import { deliverOrder } from './customers'
+import { pickFood } from './pot'
 
 export function pickingGlassSystem() {
   // DROP
@@ -174,7 +175,8 @@ export function pickUpItem(entity: Entity) {
       //pot.attachedEntity = undefined
       pot.state = SoupState.Empty
 
-      RemoveProgressBar(pot.progressBar)
+      pickFood(oldParent)
+
     }
   }
 

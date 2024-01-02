@@ -1,7 +1,8 @@
 import { Entity, Transform, MeshRenderer, Material, TransformType, engine } from "@dcl/sdk/ecs";
 import { ProgressBar } from "../definitions";
 import { Color4, Vector3, Quaternion, Scalar } from "@dcl/sdk/math";
-import { parentEntity, syncEntity } from "@dcl/sdk/network";
+import { getParent, parentEntity, syncEntity } from "@dcl/sdk/network";
+import { getSyncId } from "./helpers";
 
 
 export function CreateProgressBar(parent: Entity, height?: number, yRotation?: number, movesUp?: boolean, speed?: number) {
@@ -14,7 +15,9 @@ export function CreateProgressBar(parent: Entity, height?: number, yRotation?: n
   })
   MeshRenderer.setPlane(background)
 
-  syncEntity(background, [Transform.componentId])
+  const backgroundId = getSyncId(background)
+
+  syncEntity(background, [Transform.componentId], backgroundId)
   parentEntity(background, parent)
 
   const progressBar = engine.addEntity()
@@ -35,7 +38,10 @@ export function CreateProgressBar(parent: Entity, height?: number, yRotation?: n
     speed: speed ? speed : 1
   })
 
-  syncEntity(progressBar, [Transform.componentId, Material.componentId])
+  const progressBarId = getSyncId(progressBar)
+
+
+  syncEntity(progressBar, [Transform.componentId, Material.componentId], progressBarId)
   parentEntity(progressBar, background)
 
 
@@ -126,6 +132,12 @@ export function changeBarColor(entity: Entity, color: Color4) {
 
 export function RemoveProgressBar(entity: Entity) {
   //TODO
+  const parent = getParent(entity)
 
-  engine.removeEntityWithChildren(entity)
+  if (parent) {
+    engine.removeEntityWithChildren(parent)
+  } else {
+    engine.removeEntityWithChildren(entity)
+  }
+
 }

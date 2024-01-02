@@ -19,6 +19,7 @@ import { Vector3, Quaternion } from '@dcl/sdk/math'
 import { BeerGlass, BeerType, CuttingBoard, getTapData, GrabableObjectComponent, IngredientType, SyncEntityIDs, TapBase, TapComponent } from '../definitions'
 import { syncEntity, parentEntity } from '@dcl/sdk/network'
 import { cutSushi } from './cuttingBoard'
+import { getSyncId } from './helpers'
 
 
 
@@ -114,12 +115,12 @@ export function createIngredient(ingredient: IngredientType, position: Vector3, 
     })
   }
 
+  let id = getSyncId(entity)
+
   syncEntity(
     entity,
-    [AudioSource.componentId, Transform.componentId, GrabableObjectComponent.componentId, Tween.componentId],
-    //  id
+    [AudioSource.componentId, Transform.componentId, GrabableObjectComponent.componentId, Tween.componentId], id
   )
-  // TODO: HANDLE IDS FOR MULTIPLAYER
 
   return ingredient
 
@@ -331,19 +332,4 @@ export function createCuttingBoard(position: Vector3, id: SyncEntityIDs) {
 
 
 
-
-export function playSound(audio: string, loop: boolean = false, position?: Vector3) {
-  const entity = engine.addEntity()
-  AudioSource.create(entity, {
-    audioClipUrl: audio,
-    loop,
-    playing: true
-  })
-
-  Transform.create(entity, {
-    position
-  })
-
-  return entity
-}
 

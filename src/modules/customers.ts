@@ -1,10 +1,11 @@
 import { GltfContainer, Animator, Transform, engine, Entity, TextShape } from "@dcl/sdk/ecs"
 import { Vector3, Scalar, Quaternion, Color4 } from '@dcl/sdk/math'
-import { ProgressBar, CustomerData, IngredientType, SpeechBubbleType } from "../definitions";
+import { ProgressBar, CustomerData, IngredientType, SpeechBubbleType, BeerGlass, BeerType, GameData } from "../definitions";
 import { CreateProgressBar, RemoveProgressBar } from "./progressBars";
 import { RemoveSpeechBubble, createSpeechBubble } from "./speechBubble";
 import { syncEntity, parentEntity } from '@dcl/sdk/network'
 import * as utils from '@dcl-sdk/utils'
+import { getPlayerPosition, playSound } from "./helpers";
 
 const customerRawNoodleMessages = [
   "Me like some \nnoodles! Me like'em RAW!",
@@ -109,11 +110,11 @@ const position2 = Vector3.create(13.5, 0.75, 11.5)
 const position3 = Vector3.create(13.5, 0.75, 12.5)
 const position4 = Vector3.create(13.5, 0.75, 13.5)
 
-let playerScore: number = 0
-let playerMisses: number = 0
+// let playerScore: number = 0
+// let playerMisses: number = 0
 
-let customerTimer: number = 2
-let customerInterval: number = 10
+// let customerTimer: number = 2
+// let customerInterval: number = 10
 
 const ACCELERATION_RATE: number = 0.99
 
@@ -123,6 +124,12 @@ export function CreateCustomer() {
 
   let position: Vector3 = Vector3.Zero()
   let takenSeats: number[] = []
+
+  const [gameEntities] = engine.getEntitiesWith(CustomerData)
+  const gameEntity = gameEntities[0]
+  const gameData = GameData.getMutable(gameEntity)
+
+
 
   const customers = engine.getEntitiesWith(CustomerData)
   let customerCount = 0;
@@ -136,7 +143,7 @@ export function CreateCustomer() {
   if (customerCount > 4) return
 
 
-  if (playerScore >= 150) {
+  if (gameData.playerScore >= 150) {
     if (!takenSeats.includes(1)) {
       position = position1
       seatNumber = 1
@@ -151,7 +158,7 @@ export function CreateCustomer() {
       seatNumber = 4
     } else return
 
-  } else if (playerScore >= 50) {
+  } else if (gameData.playerScore >= 50) {
     console.log("CUSTOMER COUNT: ", customerCount, "TAKEN SEATS: ", takenSeats)
     if (!takenSeats.includes(1)) {
       position = position1
@@ -297,13 +304,18 @@ export function CustomerSystem(dt: number) {
 
 
   }
+
   // add new customers
-  customerTimer -= dt
-  if (customerTimer <= 0) {
+  const [gameEntities] = engine.getEntitiesWith(CustomerData)
+  const gameEntity = gameEntities[0]
+  const gameData = GameData.getMutable(gameEntity)
+
+  gameData.customerTimer -= dt
+  if (gameData.customerTimer <= 0) {
     CreateCustomer()
-    customerTimer = customerInterval
-    customerInterval = customerInterval * ACCELERATION_RATE
-    console.log("NEW CUSTOMER INTERVAL", customerInterval)
+    gameData.customerTimer = gameData.customerInterval
+    gameData.customerInterval = gameData.customerInterval * ACCELERATION_RATE
+    console.log("NEW CUSTOMER INTERVAL", gameData.customerInterval)
   }
 }
 
@@ -312,6 +324,8 @@ export function deliverOrder(dishType: number, customer: Entity, dish?: Entity) 
 
 
   const customerData = CustomerData.getMutable(customer)
+
+  if (customerData.receivedDish) return
 
   if (customerData.progressBar) {
     RemoveProgressBar(customerData.progressBar)
@@ -323,10 +337,14 @@ export function deliverOrder(dishType: number, customer: Entity, dish?: Entity) 
   }
 
 
+  const [gameEntities] = engine.getEntitiesWith(CustomerData)
+  const gameEntity = gameEntities[0]
+  const gameData = GameData.getMutable(gameEntity)
+
 
   if (customerData.dish == dishType) {
     // Correct dish
-    playerScore += 10
+    gameData.playerScore += 10
     updateScore()
     const message = customerCorrectDishMessages[Math.floor(Scalar.randomRange(0, customerCorrectDishMessages.length))]
     customerData.message = message
@@ -336,7 +354,7 @@ export function deliverOrder(dishType: number, customer: Entity, dish?: Entity) 
 
   } else {
     // Wrong dish
-    playerMisses += 1
+    gameData.playerMisses += 1
     updateMisses()
     const message = customerWrongDishMessages[Math.floor(Scalar.randomRange(0, customerWrongDishMessages.length))]
     customerData.message = message
@@ -349,7 +367,20 @@ export function deliverOrder(dishType: number, customer: Entity, dish?: Entity) 
   customerData.receivedDish = true
 
   if (dish) {
-    utils.timers.setTimeout(() => { engine.removeEntity(dish) }, 3000)
+    utils.timers.setTimeout(() => {
+
+      if (BeerGlass.has(dish)) {
+
+        BeerGlass.getMutable(dish).filled = false
+        BeerGlass.getMutable(dish).beerType = BeerType.NONE
+        Animator.playSingleAnimation(dish, "Blank")
+        playSound("sounds/swallow.mp3", false, getPlayerPosition())
+      } else {
+        engine.removeEntity(dish)
+      }
+
+
+    }, 3000)
 
   }
 
@@ -359,18 +390,51 @@ export function deliverOrder(dishType: number, customer: Entity, dish?: Entity) 
 
 export function updateScore() {
 
+  const [gameEntities] = engine.getEntitiesWith(CustomerData)
+  const gameEntity = gameEntities[0]
+  const gameData = GameData.getMutable(gameEntity)
+
+
   const scoreEntity = engine.getEntityOrNullByName("Score")
   if (scoreEntity) {
     const scoreText = TextShape.getMutable(scoreEntity)
-    scoreText.text = "Score: " + playerScore.toString()
+    scoreText.text = "Score: " + gameData.playerScore.toString()
   }
 
 }
 
 export function updateMisses() {
+
+  const [gameEntities] = engine.getEntitiesWith(CustomerData)
+  const gameEntity = gameEntities[0]
+  const gameData = GameData.getMutable(gameEntity)
+
+
   const missesEntity = engine.getEntityOrNullByName("Misses")
   if (missesEntity) {
     const missesText = TextShape.getMutable(missesEntity)
-    missesText.text = "Misses: " + playerMisses.toString()
+    missesText.text = "Misses: " + gameData.playerMisses.toString()
   }
+}
+
+
+export function restartGame() {
+
+  const [gameEntities] = engine.getEntitiesWith(CustomerData)
+  const gameEntity = gameEntities[0]
+  const gameData = GameData.getMutable(gameEntity)
+
+
+  gameData.playerScore = 0
+  gameData.playerMisses = 0
+  gameData.customerTimer = 2
+  gameData.customerInterval = 10
+
+  const customers = engine.getEntitiesWith(CustomerData)
+  for (const [customer] of customers) {
+    engine.removeEntityWithChildren(customer)
+  }
+
+  updateScore()
+  updateMisses()
 }

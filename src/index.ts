@@ -2,10 +2,10 @@ import {
   ColliderLayer, engine, Animator,
   AudioSource, VisibilityComponent, Material,
   VideoPlayer, pointerEventsSystem,
-  AvatarAttach, GltfContainer, PointerEvents, Tween, PointerEventType, TextShape, Transform
+  AvatarAttach, GltfContainer, PointerEvents, Tween, PointerEventType, TextShape, Transform, CameraModeArea, CameraType
 } from '@dcl/sdk/ecs'
 import { Vector3, Quaternion } from '@dcl/sdk/math'
-import { BeerType, IngredientType, SyncEntityIDs, SpeechBubbleType } from './definitions'
+import { BeerType, IngredientType, SyncEntityIDs, SpeechBubbleType, GameData } from './definitions'
 import { pickingGlassSystem } from './modules/pickAndDrop'
 import { createCuttingBoard, createIngredient, createTap, instanceBeer } from './modules/factory'
 import { tapPumpSystem } from './modules/tap'
@@ -17,7 +17,7 @@ import { TriggerType } from '@dcl/asset-packs'
 import { syncEntity } from '@dcl/sdk/network'
 import { ProgressBarUpdate } from './modules/progressBars'
 import { createSpeechBubble } from './modules/speechBubble'
-import { CustomerSystem, CreateCustomer } from './modules/customers'
+import { CustomerSystem, CreateCustomer, restartGame } from './modules/customers'
 
 // You can remove this if you don't use any asset packs
 initAssetPacks(engine, pointerEventsSystem, {
@@ -122,8 +122,14 @@ export function main() {
 
   }
 
-
-
+  // restart button
+  const restart = engine.getEntityOrNullByName("Restart_Button")
+  if (restart) {
+    const restart_event = getTriggerEvents(restart)
+    restart_event.on(TriggerType.ON_CLICK, () => {
+      restartGame()
+    })
+  }
 
 
 
@@ -185,6 +191,21 @@ export function main() {
 
   // CreateCustomer()
   // CreateCustomer()
+
+  // camera modifiera area
+  const cameraMod = engine.addEntity()
+
+  Transform.create(cameraMod, { position: Vector3.create(17, 2, 12) })
+
+  CameraModeArea.create(cameraMod, {
+    area: Vector3.create(6, 2, 10),
+    mode: CameraType.CT_FIRST_PERSON,
+  })
+
+  const gameEntity = engine.addEntity()
+  GameData.create(gameEntity, {})
+  syncEntity(gameEntity, [GameData.componentId], SyncEntityIDs.GAME_SESSION)
+
 
 
   engine.addSystem(pickingGlassSystem)

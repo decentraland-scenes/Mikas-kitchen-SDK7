@@ -2,6 +2,7 @@ import { Entity, Material, engine, Transform, TextShape, MeshRenderer, TextAlign
 import { SpeechBubbleType } from "../definitions";
 import { Color4, Vector3, Quaternion } from "@dcl/ecs-math";
 import { syncEntity, parentEntity } from '@dcl/sdk/network'
+import { getSyncId } from "./helpers";
 
 const bubble1Texture = Material.Texture.Common({
   src: 'assets/textures/bubble.png',
@@ -21,7 +22,11 @@ export function createSpeechBubble(parent: Entity, text: string, height?: number
     position: Vector3.create(-1, 0, 0),
     rotation: Quaternion.fromEulerDegrees(0, 180, 0)
   })
-  syncEntity(bubbleParent, [])
+
+  const bubbleParentId = getSyncId(bubbleParent)
+
+
+  syncEntity(bubbleParent, [], bubbleParentId)
   parentEntity(bubbleParent, parent)
 
 
@@ -57,7 +62,10 @@ export function createSpeechBubble(parent: Entity, text: string, height?: number
     //roughness: 1,
 
   })
-  syncEntity(background, [Material.componentId, Transform.componentId])
+
+  const backgroundParentId = getSyncId(background)
+
+  syncEntity(background, [Material.componentId, Transform.componentId], backgroundParentId)
   parentEntity(background, bubbleParent)
 
   const textEntity = engine.addEntity()
@@ -76,8 +84,10 @@ export function createSpeechBubble(parent: Entity, text: string, height?: number
     fontSize: 1,
   })
 
+  const textParentId = getSyncId(textEntity)
 
-  syncEntity(textEntity, [TextShape.componentId, Transform.componentId])
+
+  syncEntity(textEntity, [TextShape.componentId, Transform.componentId], textParentId)
   parentEntity(textEntity, bubbleParent)
 
 

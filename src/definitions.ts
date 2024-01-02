@@ -23,7 +23,8 @@ export enum SyncEntityIDs {
   GLASS7 = 16,
   GLASS8 = 17,
   GLASS9 = 18,
-  BEER_DISPENSER = 19
+  BEER_DISPENSER = 19,
+  GAME_SESSION = 20
   // TABLES = 19
 }
 
@@ -41,15 +42,6 @@ export type TapDataType = {
   name: string
 }
 
-// export enum TileType {
-//   Floor,
-//   Shelf,
-//   Expender,
-//   Trash,
-//   Pot,
-//   Cutter,
-//   Plate,
-// }
 
 export enum SoupState {
   Empty,
@@ -104,6 +96,12 @@ export function getTapData(tapBeerType: BeerType) {
 /**
  * Component Definitions
  */
+
+export const DynamicSyncId = engine.defineComponent('DynamicSyncId', {
+  id: Schemas.Number
+})
+
+
 
 export const BeerGlass = engine.defineComponent('BeerGlass', {
   //beingFilled: Schemas.Boolean,
@@ -237,21 +235,16 @@ export const CustomerData = engine.defineComponent('CustomerData', {
   waitingTimer: 30,
 })
 
-
-// export const CustomerPlate = engine.defineComponent('CustomerPlate', {
-//   ownerCustomer: CustomerData,
-//   hasIngredient: Schemas.Boolean,
-//   progressBar: Schemas.Entity,
-//   attachedEntity: Schemas.Entity || undefined
-// }, {
-//   state: SoupState.Empty,
-//   hasIngredient: false,
-//   attachedEntity: undefined,
-//   //progressBar: 0,
-// })
-
-// @Component('customerPlate')
-// export class CustomerPlate {
-//   ownerCustomer: CustomerData
-//   dish: IngredientType
-// }
+export const GameData = engine.defineComponent('GameData', {
+  active: Schemas.Boolean,
+  playerScore: Schemas.Number,
+  playerMisses: Schemas.Number,
+  customerTimer: Schemas.Number,
+  customerInterval: Schemas.Number,
+}, {
+  active: true,
+  playerScore: 0,
+  playerMisses: 0,
+  customerTimer: 2,
+  customerInterval: 10,
+})

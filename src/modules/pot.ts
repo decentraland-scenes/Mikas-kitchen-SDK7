@@ -2,7 +2,7 @@ import { engine, Animator, Entity, GltfContainer, PointerEvents, InputAction, Po
 import { PotData, SoupState, Cooking, SyncEntityIDs, IngredientType, GrabableObjectComponent } from '../definitions'
 import { pickUpItem } from "./pickAndDrop";
 import { syncEntity, parentEntity } from '@dcl/sdk/network'
-import { CreateProgressBar } from "./progressBars";
+import { CreateProgressBar, RemoveProgressBar } from "./progressBars";
 
 
 const COOKED_AFTER: number = 5
@@ -54,6 +54,8 @@ export function pickFood(pot: Entity) {
     if (Cooking.has(pot)) {
       Cooking.deleteFrom(pot)
     }
+
+    RemoveProgressBar(potData.progressBar)
 
   }
 

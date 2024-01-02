@@ -509,6 +509,174 @@
             },
             "parent": 0
           }
+        },
+        "534": {
+          "json": {
+            "position": {
+              "x": 8,
+              "y": -0.05000000074505806,
+              "z": 8
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0,
+              "w": 1
+            },
+            "scale": {
+              "x": 1,
+              "y": 1,
+              "z": 1
+            },
+            "parent": 0
+          }
+        },
+        "535": {
+          "json": {
+            "position": {
+              "x": 24,
+              "y": -0.05000000074505806,
+              "z": 8
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0,
+              "w": 1
+            },
+            "scale": {
+              "x": 1,
+              "y": 1,
+              "z": 1
+            },
+            "parent": 0
+          }
+        },
+        "536": {
+          "json": {
+            "position": {
+              "x": 24,
+              "y": -0.05000000074505806,
+              "z": 24
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0,
+              "w": 1
+            },
+            "scale": {
+              "x": 1,
+              "y": 1,
+              "z": 1
+            },
+            "parent": 0
+          }
+        },
+        "537": {
+          "json": {
+            "position": {
+              "x": 8,
+              "y": -0.05000000074505806,
+              "z": 24
+            },
+            "rotation": {
+              "x": 0,
+              "y": 0,
+              "z": 0,
+              "w": 1
+            },
+            "scale": {
+              "x": 1,
+              "y": 1,
+              "z": 1
+            },
+            "parent": 0
+          }
+        },
+        "538": {
+          "json": {
+            "position": {
+              "x": 17.479999542236328,
+              "y": 1.2400000095367432,
+              "z": 7.019999980926514
+            },
+            "rotation": {
+              "x": 0.7071067690849304,
+              "y": 0,
+              "z": 0,
+              "w": 0.7071067690849304
+            },
+            "scale": {
+              "x": 0.75,
+              "y": 0.75,
+              "z": 0.75
+            },
+            "parent": 0
+          }
+        },
+        "539": {
+          "json": {
+            "position": {
+              "x": 17.445201873779297,
+              "y": 1.742148756980896,
+              "z": 7.010000228881836
+            },
+            "rotation": {
+              "x": 0,
+              "y": 1,
+              "z": 0,
+              "w": 6.123234262925839e-17
+            },
+            "scale": {
+              "x": 1,
+              "y": 1,
+              "z": 1
+            },
+            "parent": 0
+          }
+        },
+        "540": {
+          "json": {
+            "position": {
+              "x": 12.081329345703125,
+              "y": 4.309999942779541,
+              "z": 1.010474443435669
+            },
+            "rotation": {
+              "x": 0,
+              "y": 1,
+              "z": 0,
+              "w": 6.123234262925839e-17
+            },
+            "scale": {
+              "x": 1,
+              "y": 1,
+              "z": 1
+            },
+            "parent": 0
+          }
+        },
+        "541": {
+          "json": {
+            "position": {
+              "x": 0.9356998801231384,
+              "y": 4.95363712310791,
+              "z": 12.010000228881836
+            },
+            "rotation": {
+              "x": -0.7071067690849304,
+              "y": -4.329780632585522e-17,
+              "z": 0.7071067690849304,
+              "w": 4.329780632585522e-17
+            },
+            "scale": {
+              "x": 0.9999999403953552,
+              "y": 0.9999999403953552,
+              "z": 0.9999999403953552
+            },
+            "parent": 0
+          }
         }
       }
     },
@@ -646,6 +814,55 @@
             "visibleMeshesCollisionMask": 1,
             "invisibleMeshesCollisionMask": 2
           }
+        },
+        "534": {
+          "json": {
+            "src": "assets/builder/concrete/FloorBaseConcrete_01/FloorBaseConcrete_01.glb",
+            "visibleMeshesCollisionMask": 1,
+            "invisibleMeshesCollisionMask": 2
+          }
+        },
+        "535": {
+          "json": {
+            "src": "assets/builder/concrete/FloorBaseConcrete_01/FloorBaseConcrete_01.glb",
+            "visibleMeshesCollisionMask": 1,
+            "invisibleMeshesCollisionMask": 2
+          }
+        },
+        "536": {
+          "json": {
+            "src": "assets/builder/concrete/FloorBaseConcrete_01/FloorBaseConcrete_01.glb",
+            "visibleMeshesCollisionMask": 1,
+            "invisibleMeshesCollisionMask": 2
+          }
+        },
+        "537": {
+          "json": {
+            "src": "assets/builder/concrete/FloorBaseConcrete_01/FloorBaseConcrete_01.glb",
+            "visibleMeshesCollisionMask": 1,
+            "invisibleMeshesCollisionMask": 2
+          }
+        },
+        "538": {
+          "json": {
+            "src": "assets/builder/red_light_button/red_scifi_button.glb",
+            "visibleMeshesCollisionMask": 1,
+            "invisibleMeshesCollisionMask": 2
+          }
+        },
+        "540": {
+          "json": {
+            "src": "assets/builder/arrow_sign/Arrow_Sign.glb",
+            "visibleMeshesCollisionMask": 1,
+            "invisibleMeshesCollisionMask": 2
+          }
+        },
+        "541": {
+          "json": {
+            "src": "assets/builder/arrow_sign/Arrow_Sign.glb",
+            "visibleMeshesCollisionMask": 1,
+            "invisibleMeshesCollisionMask": 2
+          }
         }
       }
     },
@@ -761,6 +978,46 @@
           "json": {
             "value": "Misses"
           }
+        },
+        "534": {
+          "json": {
+            "value": "Concrete"
+          }
+        },
+        "535": {
+          "json": {
+            "value": "Concrete"
+          }
+        },
+        "536": {
+          "json": {
+            "value": "Concrete"
+          }
+        },
+        "537": {
+          "json": {
+            "value": "Concrete"
+          }
+        },
+        "538": {
+          "json": {
+            "value": "Restart_Button"
+          }
+        },
+        "539": {
+          "json": {
+            "value": "Text"
+          }
+        },
+        "540": {
+          "json": {
+            "value": "Arrow Sign"
+          }
+        },
+        "541": {
+          "json": {
+            "value": "Arrow Sign"
+          }
         }
       }
     },
@@ -845,6 +1102,44 @@
               "r": 1,
               "g": 0,
               "b": 0,
+              "a": 1
+            }
+          }
+        },
+        "539": {
+          "json": {
+            "text": "Restart",
+            "font": 2,
+            "fontSize": 3,
+            "fontAutoSize": false,
+            "textAlign": 4,
+            "width": 100,
+            "height": 100,
+            "paddingTop": 0,
+            "paddingRight": 0,
+            "paddingBottom": 0,
+            "paddingLeft": 0,
+            "lineSpacing": 0,
+            "lineCount": 1,
+            "textWrapping": false,
+            "shadowBlur": 0,
+            "shadowOffsetX": 0,
+            "shadowOffsetY": 0,
+            "outlineWidth": 0,
+            "shadowColor": {
+              "r": 1,
+              "g": 1,
+              "b": 1
+            },
+            "outlineColor": {
+              "r": 1,
+              "g": 1,
+              "b": 1
+            },
+            "textColor": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
               "a": 1
             }
           }
@@ -1257,6 +1552,20 @@
               }
             ]
           }
+        },
+        "538": {
+          "json": {
+            "states": [
+              {
+                "clip": "trigger",
+                "playing": false,
+                "weight": 1,
+                "speed": 1,
+                "loop": false,
+                "shouldReset": false
+              }
+            ]
+          }
         }
       }
     },
@@ -1418,6 +1727,21 @@
               }
             ]
           }
+        },
+        "538": {
+          "json": {
+            "pointerEvents": [
+              {
+                "eventType": 1,
+                "eventInfo": {
+                  "button": 0,
+                  "hoverText": "Restart",
+                  "maxDistance": 10,
+                  "showFeedback": true
+                }
+              }
+            ]
+          }
         }
       }
     },
@@ -1434,7 +1758,7 @@
         "serializationType": "map"
       },
       "data": {
-        "513": {
+        "541": {
           "json": {
             "gizmo": 0
           }
@@ -1583,7 +1907,15 @@
                   529,
                   530,
                   531,
-                  532
+                  532,
+                  534,
+                  535,
+                  536,
+                  537,
+                  538,
+                  539,
+                  540,
+                  541
                 ]
               },
               {
@@ -1664,6 +1996,38 @@
               },
               {
                 "entity": 532,
+                "children": []
+              },
+              {
+                "entity": 534,
+                "children": []
+              },
+              {
+                "entity": 535,
+                "children": []
+              },
+              {
+                "entity": 536,
+                "children": []
+              },
+              {
+                "entity": 537,
+                "children": []
+              },
+              {
+                "entity": 538,
+                "children": []
+              },
+              {
+                "entity": 539,
+                "children": []
+              },
+              {
+                "entity": 540,
+                "children": []
+              },
+              {
+                "entity": 541,
                 "children": []
               }
             ]
@@ -1932,6 +2296,23 @@
               }
             ]
           }
+        },
+        "538": {
+          "json": {
+            "id": 5,
+            "value": [
+              {
+                "name": "Play Activate Animation",
+                "type": "play_animation",
+                "jsonPayload": "{ \"animation\": \"trigger\" }"
+              },
+              {
+                "name": "Play Sound",
+                "type": "play_sound",
+                "jsonPayload": "{\"src\":\"assets/builder/red_light_button/sound.mp3\"}"
+              }
+            ]
+          }
         }
       }
     },
@@ -1955,7 +2336,7 @@
         "0": {
           "json": {
             "id": 0,
-            "value": 4
+            "value": 5
           }
         }
       }
@@ -2177,6 +2558,26 @@
               }
             ]
           }
+        },
+        "538": {
+          "json": {
+            "value": [
+              {
+                "type": "on_click",
+                "conditions": [],
+                "actions": [
+                  {
+                    "id": 5,
+                    "name": "Play Activate Animation"
+                  },
+                  {
+                    "id": 5,
+                    "name": "Play Sound"
+                  }
+                ]
+              }
+            ]
+          }
         }
       }
     },
@@ -2255,6 +2656,30 @@
           "json": {}
         },
         "532": {
+          "json": {}
+        },
+        "534": {
+          "json": {}
+        },
+        "535": {
+          "json": {}
+        },
+        "536": {
+          "json": {}
+        },
+        "537": {
+          "json": {}
+        },
+        "538": {
+          "json": {}
+        },
+        "539": {
+          "json": {}
+        },
+        "540": {
+          "json": {}
+        },
+        "541": {
           "json": {}
         }
       }
