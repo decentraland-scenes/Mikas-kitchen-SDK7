@@ -14,7 +14,7 @@ import { BeerGlass, CuttingBoard, PotData, SoupState, GrabableObjectComponent, I
 import { playSound } from './factory'
 import { currentPlayerId, getPlayerPosition } from './helpers'
 import { syncEntity, parentEntity, getParent, removeParent, getChildren } from '@dcl/sdk/network'
-import { ruinFood } from './cuttingBoard'
+import { ruinFood, switchToCutMode, switchToEmpty } from './cuttingBoard'
 import { RemoveProgressBar } from './progressBars'
 import { deliverOrder } from './customers'
 
@@ -58,6 +58,8 @@ export function pickingGlassSystem() {
           board.cutting = false
           board.cuts = 0
           Animator.stopAllAnimations(hitEntity, true)
+
+          switchToCutMode(board.modelEntity)
 
         }
 
@@ -183,6 +185,7 @@ export function pickUpItem(entity: Entity) {
       //board.rollChild = undefined
       board.cutting = false
       board.cuts = 0
+      switchToEmpty(board.modelEntity)
     }
   }
 
@@ -208,7 +211,7 @@ export function checkNearCustomer(entity: Entity) {
     const itemData = GrabableObjectComponent.get(entity)
 
 
-    deliverOrder(itemData.type, closestCustomer)
+    deliverOrder(itemData.type, closestCustomer, entity)
   }
 }
 

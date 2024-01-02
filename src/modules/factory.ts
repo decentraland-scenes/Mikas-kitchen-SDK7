@@ -284,7 +284,7 @@ export function createCuttingBoard(position: Vector3, id: SyncEntityIDs) {
   pointerEventsSystem.onPointerDown(
     {
       entity: boardModel,
-      opts: { button: InputAction.IA_PRIMARY, hoverText: 'Cut', maxDistance: 5, },
+      opts: { button: InputAction.IA_PRIMARY, hoverText: 'Put', maxDistance: 5, },
     },
     function () {
       cutSushi(CutterParent, boardModel)
@@ -292,7 +292,9 @@ export function createCuttingBoard(position: Vector3, id: SyncEntityIDs) {
     }
   )
 
-  syncEntity(boardModel, [Animator.componentId, AudioSource.componentId, CuttingBoard.componentId], id)
+
+
+  syncEntity(boardModel, [Animator.componentId, AudioSource.componentId, CuttingBoard.componentId, PointerEvents.componentId], id)
 
   parentEntity(boardModel, CutterParent)
 

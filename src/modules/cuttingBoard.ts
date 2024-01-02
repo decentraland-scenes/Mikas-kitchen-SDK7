@@ -1,4 +1,4 @@
-import { Animator, Entity, GltfContainer } from "@dcl/ecs";
+import { Animator, Entity, GltfContainer, InputAction, PointerEvents, pointerEventsSystem } from "@dcl/ecs";
 import { CuttingBoard, GrabableObjectComponent, IngredientType } from "../definitions";
 import * as utils from '@dcl-sdk/utils'
 
@@ -36,8 +36,12 @@ export function cutSushi(entity: Entity, modelEntity: Entity) {
     case 5:
       Animator.playSingleAnimation(modelEntity, "State5", false)
       if (ingredientData.type != IngredientType.SushiRoll) return
-      ingredientData.type = IngredientType.SlicedSushi
-      GltfContainer.getMutable(ingredient).src = "assets/models/PlateSushi.glb"
+
+      utils.timers.setTimeout(() => {
+        ingredientData.type = IngredientType.SlicedSushi
+        GltfContainer.getMutable(ingredient).src = "assets/models/PlateSushi.glb"
+      }, 300)
+
       break;
     case 6:
       Animator.playSingleAnimation(modelEntity, "State5", false)
@@ -51,6 +55,26 @@ export function cutSushi(entity: Entity, modelEntity: Entity) {
   utils.timers.setTimeout(() => {
     boardData.cutting = false
   }, 500)
+
+}
+
+export function switchToCutMode(entity: Entity) {
+
+  const pointerEvent = PointerEvents.getMutable(entity).pointerEvents[0]
+  if (pointerEvent && pointerEvent.eventInfo) {
+    pointerEvent.eventInfo.hoverText = "Cut"
+    // pointerEvent.eventInfo.button = InputAction.IA_POINTER
+  }
+}
+
+export function switchToEmpty(entity: Entity) {
+
+  const pointerEvent = PointerEvents.getMutable(entity).pointerEvents[0]
+  if (pointerEvent && pointerEvent.eventInfo) {
+    pointerEvent.eventInfo.hoverText = "Put"
+    pointerEvent.eventInfo.button = InputAction.IA_PRIMARY
+  }
+  Animator.stopAllAnimations(entity, true)
 
 }
 

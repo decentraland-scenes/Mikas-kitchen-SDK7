@@ -178,13 +178,13 @@ export function main() {
 
 
   // FOR TESTING
-  createIngredient(IngredientType.Noodles, Vector3.create(4.4, 0.8, 1.5))
-  createIngredient(IngredientType.SushiRoll, Vector3.create(6.4, 0.8, 1.5))
-  createIngredient(IngredientType.SlicedSushi, Vector3.create(8.4, 0.8, 1.5))
-  createIngredient(IngredientType.CookedNoodles, Vector3.create(10.4, 0.8, 1.5))
+  // createIngredient(IngredientType.Noodles, Vector3.create(4.4, 0.8, 1.5))
+  // createIngredient(IngredientType.SushiRoll, Vector3.create(6.4, 0.8, 1.5))
+  // createIngredient(IngredientType.SlicedSushi, Vector3.create(8.4, 0.8, 1.5))
+  // createIngredient(IngredientType.CookedNoodles, Vector3.create(10.4, 0.8, 1.5))
 
-  CreateCustomer()
-  CreateCustomer()
+  // CreateCustomer()
+  // CreateCustomer()
 
 
   engine.addSystem(pickingGlassSystem)

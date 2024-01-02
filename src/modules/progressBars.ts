@@ -106,7 +106,6 @@ export function ProgressBarUpdate(dt: number) {
       transform.scale.x = width
       transform.position.x = -progressBar.fullLength / 2 + width / 2
 
-      console.log(transform.scale.x)
     }
 
   }
