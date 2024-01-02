@@ -67,7 +67,7 @@ export function startCooking(pot: Entity) {
 
   Cooking.createOrReplace(pot)
 
-  CreateProgressBar(pot, 1, 0, true)
+  CreateProgressBar(pot, 1, 270, true)
 
 }
 

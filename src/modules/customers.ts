@@ -1,4 +1,4 @@
-import { GltfContainer, Animator, Transform, engine, Entity } from "@dcl/sdk/ecs"
+import { GltfContainer, Animator, Transform, engine, Entity, TextShape } from "@dcl/sdk/ecs"
 import { Vector3, Scalar, Quaternion, Color4 } from '@dcl/sdk/math'
 import { ProgressBar, CustomerData, IngredientType, SpeechBubbleType } from "../definitions";
 import { CreateProgressBar, RemoveProgressBar } from "./progressBars";
@@ -6,73 +6,73 @@ import { RemoveSpeechBubble, createSpeechBubble } from "./speechBubble";
 import { syncEntity, parentEntity } from '@dcl/sdk/network'
 
 const customerRawNoodleMessages = [
-  "Me like some noodles! Me like'em RAW!",
-  'RAW noodles please, and hurry!',
-  'Noodles! A nice dry brick of RAW ones!',
-  'Noodles! NO cooking for me',
+  "Me like some \nnoodles! Me like'em RAW!",
+  'RAW noodles please, \nand hurry!',
+  'Noodles! A nice \ndry brick of RAW ones!',
+  'Noodles! \nNO cooking for me',
   'HARD RAW NOODLES'
 ]
 
 const customerRawSushiMessages = [
-  'They say you got the best rolls, gimme! NO slicing!',
-  'One roll please. In ONE piece!',
-  'A full sushi roll I can swallow in one gulp!',
+  'They say you got \nthe best rolls, \ngimme! NO slicing!',
+  'One roll please. \nIn ONE piece!',
+  'A full sushi roll \nI can swallow in one gulp!',
   'SUSHI. NO CUTTING.'
 ]
 
 const customerCookedNoodleMessages = [
-  'I want cooked noodles, NOW!',
-  'I... need... my... hot... noodles...',
-  'Ramen Noodles, they better be here soon.',
-  "Decentraland's best ramen huh? I'll try some",
-  'A bowl of noodles, please'
+  'I want cooked \nnoodles, NOW!',
+  'I... need... my... \nhot... noodles...',
+  'Ramen Noodles, they \nbetter be here soon.',
+  "Decentraland's best \nramen huh? I'll try some",
+  'A bowl of noodles, \nplease'
 ]
 
 const customerSlicedSushiMessages = [
-  'sliced sushi! onegai shimaaasu!',
+  'sliced sushi! \nonegai shimaaasu!',
   'Sushi. Tic Toc.',
-  'Sushi dammit! What rya waiting for?',
-  'Been exploring decentraland all day, sushi please'
+  'Sushi dammit! \nWhat rya waiting for?',
+  'Been exploring \nDecentraland all day, \nsushi please'
 ]
 
 const customerTrashMessages = [
-  'Noodles! Gimme the stinky ones!',
-  'Noodles, the burrrrrrrnt the better!',
-  'Well-cooked noodles. Burnt, as you people say.',
-  "They say you sell garbage for food, I'd like some",
-  "Garbage, don't care what kind"
+  'Noodles! Gimme \nthe stinky ones!',
+  'Noodles, the burrrrrrrnt\n the better!',
+  'Well-cooked noodles. \nBurnt, as you people say.',
+  "They say you sell\n garbage for food,\n I'd like some",
+  "Garbage, don't care\n what kind"
 ]
 
 const customerEmptyBeerMessages = [
-  'An empty beer glass. So it looks like I was waiting long',
-  'Just a glass, nothing in it. Feeling existential.',
-  'Empty glass. All I can afford.',
+  'An empty beer glass. \nSo it looks like I was \nwaiting long',
+  'Just a glass, nothing\n in it. \nFeeling existential.',
+  'Empty glass. All I\n can afford.',
 ]
 
 const customerYellowBeerMessages = [
-  'I want a cold regular beer!',
-  'I heard you do craft beer, gimme a yellow!',
-  'Beer! A nice cold normal one!',
+  'I want a cold regular\n beer!',
+  'I heard you do craft\n beer, gimme a yellow!',
+  'Beer! A nice cold normal\n one!',
 ]
 
 const customerRedBeerMessages = [
   'I want a RED beer!',
-  'Red beer. Im a bit of a hipster!',
-  'Beer red like the blood of my enemies! lol',
+  'Red beer. Im a \nbit of a hipster!',
+  'Beer red like the \nblood of my enemies! \nlol',
 ]
 
 
 const customerGreenBeerMessages = [
-  'I like weird stuff, green beer!',
-  'Green Beer. Dont care about the taste, want a cool pic for insagram',
-  'Beer! A nice cold green one!',
+  'I like weird stuff, \ngreen beer!',
+  'Green Beer. Dont care \nabout the taste, want \na cool pic for insagram',
+  'Beer! A nice cold \ngreen one!',
 ]
 
 
 const customerLookingMessage = [
   'Im just here to watch',
-  'I dont want anything. Just here to make you feel uncomfortable.',
-  'Making a documentary, keep working as if Im not here',
+  'I dont want anything. \nJust here to make you \nfeel uncomfortable.',
+  'Making a documentary, \nkeep working as if \nIm not here',
 ]
 
 
@@ -91,13 +91,13 @@ const customerCorrectDishMessages = [
 ]
 
 const customerWrongDishMessages = [
-  'Customer service SUCKS here!',
-  'Do you even understand my language?',
+  'Customer service \nSUCKS here!',
+  'Do you even understand \nmy language?',
   'What a waste of time!',
   'NO! NO! NO!',
-  "Guess who's a ramen shop critic?",
-  "I'll never come back here",
-  "I'll talk SO bad about this place",
+  "Guess who's a \nramen shop critic?",
+  "I'll never come \nback here",
+  "I'll talk SO bad \nabout this place",
   'щ(ºДºщ)',
   '@#&*#$!',
   '୧༼ಠ益ಠ༽'
@@ -126,7 +126,7 @@ export function CreateCustomer() {
   if (customerCount > 4) return
 
 
-  if (playerScore >= 350) {
+  if (playerScore >= 150) {
 
     if (customerCount < 1) {
       position = position1
@@ -141,7 +141,7 @@ export function CreateCustomer() {
       position = position4
       seatNumber = 4
     } else return
-  } else if (playerScore >= 100) {
+  } else if (playerScore >= 50) {
     if (customerCount < 1) {
       position = position1
       seatNumber = 1
@@ -306,6 +306,7 @@ export function deliverOrder(dishType: number, customer: Entity, dish?: Entity) 
   if (customerData.dish == dishType) {
     // Correct dish
     playerScore += 10
+    updateScore()
     const message = customerCorrectDishMessages[Math.floor(Scalar.randomRange(0, customerCorrectDishMessages.length))]
     customerData.message = message
 
@@ -315,6 +316,7 @@ export function deliverOrder(dishType: number, customer: Entity, dish?: Entity) 
   } else {
     // Wrong dish
     playerMisses += 1
+    updateMisses()
     const message = customerWrongDishMessages[Math.floor(Scalar.randomRange(0, customerWrongDishMessages.length))]
     customerData.message = message
 
@@ -329,4 +331,24 @@ export function deliverOrder(dishType: number, customer: Entity, dish?: Entity) 
     engine.removeEntity(dish)
   }
 
+}
+
+
+
+export function updateScore() {
+
+  const scoreEntity = engine.getEntityOrNullByName("Score")
+  if (scoreEntity) {
+    const scoreText = TextShape.getMutable(scoreEntity)
+    scoreText.text = "Score: " + playerScore.toString()
+  }
+
+}
+
+export function updateMisses() {
+  const missesEntity = engine.getEntityOrNullByName("Misses")
+  if (missesEntity) {
+    const missesText = TextShape.getMutable(missesEntity)
+    missesText.text = "Misses: " + playerMisses.toString()
+  }
 }
