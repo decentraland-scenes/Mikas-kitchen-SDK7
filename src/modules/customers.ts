@@ -2,7 +2,7 @@ import { GltfContainer, Animator, Transform, engine, Entity, TextShape } from "@
 import { Vector3, Scalar, Quaternion, Color4 } from '@dcl/sdk/math'
 import { ProgressBar, CustomerData, IngredientType, SpeechBubbleType, BeerGlass, BeerType, GameData } from "../definitions";
 import { CreateProgressBar, RemoveProgressBar } from "./progressBars";
-import { RemoveSpeechBubble, createSpeechBubble } from "./speechBubble";
+import { RemoveSpeechBubble, createSpeechBubble, updateSpeechBubble } from "./speechBubble";
 import { syncEntity, parentEntity } from '@dcl/sdk/network'
 import * as utils from '@dcl-sdk/utils'
 import { getPlayerPosition, playSound } from "./helpers";
@@ -125,8 +125,9 @@ export function CreateCustomer() {
   let position: Vector3 = Vector3.Zero()
   let takenSeats: number[] = []
 
-  const [gameEntities] = engine.getEntitiesWith(CustomerData)
+  const [gameEntities] = engine.getEntitiesWith(GameData)
   const gameEntity = gameEntities[0]
+  if (!gameEntity || !GameData.has(gameEntity)) return
   const gameData = GameData.getMutable(gameEntity)
 
 
@@ -306,16 +307,17 @@ export function CustomerSystem(dt: number) {
   }
 
   // add new customers
-  const [gameEntities] = engine.getEntitiesWith(CustomerData)
-  const gameEntity = gameEntities[0]
-  const gameData = GameData.getMutable(gameEntity)
+  for (const [entity] of engine.getEntitiesWith(GameData)) {
 
-  gameData.customerTimer -= dt
-  if (gameData.customerTimer <= 0) {
-    CreateCustomer()
-    gameData.customerTimer = gameData.customerInterval
-    gameData.customerInterval = gameData.customerInterval * ACCELERATION_RATE
-    console.log("NEW CUSTOMER INTERVAL", gameData.customerInterval)
+    const gameData = GameData.getMutable(entity)
+
+    gameData.customerTimer -= dt
+    if (gameData.customerTimer <= 0) {
+      CreateCustomer()
+      gameData.customerTimer = gameData.customerInterval
+      gameData.customerInterval = gameData.customerInterval * ACCELERATION_RATE
+      console.log("NEW CUSTOMER INTERVAL", gameData.customerInterval)
+    }
   }
 }
 
@@ -332,13 +334,14 @@ export function deliverOrder(dishType: number, customer: Entity, dish?: Entity) 
   }
 
 
-  if (customerData.speechBubble) {
-    RemoveSpeechBubble(customerData.speechBubble)
-  }
+  // if (customerData.speechBubble) {
+  //   RemoveSpeechBubble(customerData.speechBubble)
+  // }
 
 
-  const [gameEntities] = engine.getEntitiesWith(CustomerData)
+  const [gameEntities] = engine.getEntitiesWith(GameData)
   const gameEntity = gameEntities[0]
+  if (!gameEntity || !GameData.has(gameEntity)) return
   const gameData = GameData.getMutable(gameEntity)
 
 
@@ -349,8 +352,10 @@ export function deliverOrder(dishType: number, customer: Entity, dish?: Entity) 
     const message = customerCorrectDishMessages[Math.floor(Scalar.randomRange(0, customerCorrectDishMessages.length))]
     customerData.message = message
 
-    const speechBubble = createSpeechBubble(customer, message, 2.3, SpeechBubbleType.Good)
-    customerData.speechBubble = speechBubble
+    updateSpeechBubble(customerData.speechBubble, message, SpeechBubbleType.Good)
+
+    // const speechBubble = createSpeechBubble(customer, message, 2.3, SpeechBubbleType.Good)
+    // customerData.speechBubble = speechBubble
 
   } else {
     // Wrong dish
@@ -359,8 +364,10 @@ export function deliverOrder(dishType: number, customer: Entity, dish?: Entity) 
     const message = customerWrongDishMessages[Math.floor(Scalar.randomRange(0, customerWrongDishMessages.length))]
     customerData.message = message
 
-    const speechBubble = createSpeechBubble(customer, message, 2.3, SpeechBubbleType.Bad)
-    customerData.speechBubble = speechBubble
+    updateSpeechBubble(customerData.speechBubble, message, SpeechBubbleType.Bad)
+
+    // const speechBubble = createSpeechBubble(customer, message, 2.3, SpeechBubbleType.Bad)
+    // customerData.speechBubble = speechBubble
   }
 
 
@@ -390,8 +397,9 @@ export function deliverOrder(dishType: number, customer: Entity, dish?: Entity) 
 
 export function updateScore() {
 
-  const [gameEntities] = engine.getEntitiesWith(CustomerData)
+  const [gameEntities] = engine.getEntitiesWith(GameData)
   const gameEntity = gameEntities[0]
+  if (!gameEntity || !GameData.has(gameEntity)) return
   const gameData = GameData.getMutable(gameEntity)
 
 
@@ -405,8 +413,9 @@ export function updateScore() {
 
 export function updateMisses() {
 
-  const [gameEntities] = engine.getEntitiesWith(CustomerData)
+  const [gameEntities] = engine.getEntitiesWith(GameData)
   const gameEntity = gameEntities[0]
+  if (!gameEntity || !GameData.has(gameEntity)) return
   const gameData = GameData.getMutable(gameEntity)
 
 
@@ -420,8 +429,9 @@ export function updateMisses() {
 
 export function restartGame() {
 
-  const [gameEntities] = engine.getEntitiesWith(CustomerData)
+  const [gameEntities] = engine.getEntitiesWith(GameData)
   const gameEntity = gameEntities[0]
+  if (!gameEntity || !GameData.has(gameEntity)) return
   const gameData = GameData.getMutable(gameEntity)
 
 

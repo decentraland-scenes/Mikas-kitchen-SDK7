@@ -33,23 +33,12 @@ initAssetPacks(engine, pointerEventsSystem, {
 
 
 export function main() {
-  // Create tables
-  // const environment = engine.addEntity()
-  // Transform.create(environment, {
-  //   position: Vector3.create(11, 0, 11),
-  //   rotation: Quaternion.fromEulerDegrees(0, 180, 0)
-  // })
-  // GltfContainer.create(environment, { src: 'models/Environment.glb', visibleMeshesCollisionMask: ColliderLayer.CL_POINTER })
-  // PointerEvents.create(environment, {
-  //   pointerEvents: [
-  //     {
-  //       eventType: PointerEventType.PET_DOWN,
-  //       eventInfo: {
-  //         showFeedback: false
-  //       }
-  //     }
-  //   ]
-  // })
+
+  const gameEntity = engine.addEntity()
+  GameData.create(gameEntity, {})
+  syncEntity(gameEntity, [GameData.componentId], SyncEntityIDs.GAME_SESSION)
+
+
 
   const easterEgg = engine.addEntity()
   Transform.create(easterEgg, {
@@ -87,6 +76,10 @@ export function main() {
 
     })
 
+    syncEntity(noodles_button, [Animator.componentId, AudioSource.componentId], SyncEntityIDs.DISPENSER_BUTTON1)
+    syncEntity(roll_button, [Animator.componentId, AudioSource.componentId], SyncEntityIDs.DISPENSER_BUTTON2)
+
+
   }
 
 
@@ -119,6 +112,8 @@ export function main() {
       //createSpeechBubble(pot1, "I'm a pot MUAHAHA", 1, SpeechBubbleType.Bad)
     })
 
+    syncEntity(pot1_button, [Animator.componentId, AudioSource.componentId], SyncEntityIDs.POT_BUTTON1)
+    syncEntity(pot2_button, [Animator.componentId, AudioSource.componentId], SyncEntityIDs.POT_BUTTON2)
 
   }
 
@@ -129,6 +124,9 @@ export function main() {
     restart_event.on(TriggerType.ON_CLICK, () => {
       restartGame()
     })
+
+    syncEntity(restart, [Animator.componentId, AudioSource.componentId], SyncEntityIDs.RESET_BUTTON)
+
   }
 
 
@@ -202,9 +200,13 @@ export function main() {
     mode: CameraType.CT_FIRST_PERSON,
   })
 
-  const gameEntity = engine.addEntity()
-  GameData.create(gameEntity, {})
-  syncEntity(gameEntity, [GameData.componentId], SyncEntityIDs.GAME_SESSION)
+
+  const score = engine.getEntityOrNullByName("Score")
+  const misses = engine.getEntityOrNullByName("Misses")
+  if (score && misses) {
+    syncEntity(score, [TextShape.componentId], SyncEntityIDs.SCORE_TEXT)
+    syncEntity(misses, [TextShape.componentId], SyncEntityIDs.MISSES_TEXT)
+  }
 
 
 
