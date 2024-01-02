@@ -1,8 +1,7 @@
 import { Animator, engine, InputAction, inputSystem, PointerEventType, Transform } from '@dcl/sdk/ecs'
 import { Scalar } from '@dcl/sdk/math'
 import { BeerGlass, BeerType, getTapData, GrabableObjectComponent, IngredientType, TapBase, TapComponent } from '../definitions'
-import { playSound } from './factory'
-import { getPlayerPosition } from './helpers'
+import { getPlayerPosition, playSound } from './helpers'
 import { getParent } from '@dcl/sdk/network'
 
 function getBeerBehindTap(beerType: BeerType) {
