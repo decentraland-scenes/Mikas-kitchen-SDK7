@@ -146,6 +146,7 @@ export function pickingGlassSystem() {
   }
 }
 
+
 export function pickUpItem(entity: Entity) {
   const oldParent = getParent(entity)
   const parentToGrabbed = engine.addEntity()
@@ -154,6 +155,7 @@ export function pickUpItem(entity: Entity) {
   })
 
   AvatarAttach.create(parentToGrabbed, {
+    avatarId: currentPlayerId,
     anchorPointId: AvatarAnchorPointType.AAPT_RIGHT_HAND
   })
   Transform.createOrReplace(entity, {
