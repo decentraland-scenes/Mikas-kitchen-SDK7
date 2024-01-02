@@ -119,7 +119,7 @@ export function createIngredient(ingredient: IngredientType, position: Vector3, 
 
   syncEntity(
     entity,
-    [AudioSource.componentId, Transform.componentId, GrabableObjectComponent.componentId, Tween.componentId], id
+    [AudioSource.componentId, Transform.componentId, GrabableObjectComponent.componentId, Tween.componentId, GltfContainer.componentId], id
   )
 
   return ingredient
