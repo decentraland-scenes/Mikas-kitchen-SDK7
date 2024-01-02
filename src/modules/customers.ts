@@ -125,8 +125,9 @@ export function CreateCustomer() {
   let position: Vector3 = Vector3.Zero()
   let takenSeats: number[] = []
 
-  const [gameEntities] = engine.getEntitiesWith(CustomerData)
+  const [gameEntities] = engine.getEntitiesWith(GameData)
   const gameEntity = gameEntities[0]
+  if (!gameEntity || !GameData.has(gameEntity)) return
   const gameData = GameData.getMutable(gameEntity)
 
 
@@ -306,16 +307,17 @@ export function CustomerSystem(dt: number) {
   }
 
   // add new customers
-  const [gameEntities] = engine.getEntitiesWith(CustomerData)
-  const gameEntity = gameEntities[0]
-  const gameData = GameData.getMutable(gameEntity)
+  for (const [entity] of engine.getEntitiesWith(GameData)) {
 
-  gameData.customerTimer -= dt
-  if (gameData.customerTimer <= 0) {
-    CreateCustomer()
-    gameData.customerTimer = gameData.customerInterval
-    gameData.customerInterval = gameData.customerInterval * ACCELERATION_RATE
-    console.log("NEW CUSTOMER INTERVAL", gameData.customerInterval)
+    const gameData = GameData.getMutable(entity)
+
+    gameData.customerTimer -= dt
+    if (gameData.customerTimer <= 0) {
+      CreateCustomer()
+      gameData.customerTimer = gameData.customerInterval
+      gameData.customerInterval = gameData.customerInterval * ACCELERATION_RATE
+      console.log("NEW CUSTOMER INTERVAL", gameData.customerInterval)
+    }
   }
 }
 
@@ -337,8 +339,9 @@ export function deliverOrder(dishType: number, customer: Entity, dish?: Entity) 
   }
 
 
-  const [gameEntities] = engine.getEntitiesWith(CustomerData)
+  const [gameEntities] = engine.getEntitiesWith(GameData)
   const gameEntity = gameEntities[0]
+  if (!gameEntity || !GameData.has(gameEntity)) return
   const gameData = GameData.getMutable(gameEntity)
 
 
@@ -390,8 +393,9 @@ export function deliverOrder(dishType: number, customer: Entity, dish?: Entity) 
 
 export function updateScore() {
 
-  const [gameEntities] = engine.getEntitiesWith(CustomerData)
+  const [gameEntities] = engine.getEntitiesWith(GameData)
   const gameEntity = gameEntities[0]
+  if (!gameEntity || !GameData.has(gameEntity)) return
   const gameData = GameData.getMutable(gameEntity)
 
 
@@ -405,8 +409,9 @@ export function updateScore() {
 
 export function updateMisses() {
 
-  const [gameEntities] = engine.getEntitiesWith(CustomerData)
+  const [gameEntities] = engine.getEntitiesWith(GameData)
   const gameEntity = gameEntities[0]
+  if (!gameEntity || !GameData.has(gameEntity)) return
   const gameData = GameData.getMutable(gameEntity)
 
 
@@ -420,8 +425,9 @@ export function updateMisses() {
 
 export function restartGame() {
 
-  const [gameEntities] = engine.getEntitiesWith(CustomerData)
+  const [gameEntities] = engine.getEntitiesWith(GameData)
   const gameEntity = gameEntities[0]
+  if (!gameEntity || !GameData.has(gameEntity)) return
   const gameData = GameData.getMutable(gameEntity)
 
 
