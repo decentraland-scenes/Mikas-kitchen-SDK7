@@ -103,6 +103,10 @@ const customerWrongDishMessages = [
   '୧༼ಠ益ಠ༽'
 ]
 
+const position1 = Vector3.create(13.5, 0.75, 10.5)
+const position2 = Vector3.create(13.5, 0.75, 11.5)
+const position3 = Vector3.create(13.5, 0.75, 12.5)
+const position4 = Vector3.create(13.5, 0.75, 13.5)
 
 let playerScore: number = 0
 let playerMisses: number = 0
@@ -119,24 +123,39 @@ export function CreateCustomer() {
 
   let seatNumber: number = 0
 
-  if (customerCount < 4) {
-    if (playerScore >= 350) {
-      if (customerCount < 3) {
-        position = Vector3.create(13.5, 0.75, 12.5)
-        seatNumber = 3
-      }
-    } else if (playerScore >= 250) {
-      if (customerCount < 2) {
-        position = Vector3.create(13.5, 0.75, 11.5)
-        seatNumber = 2
-      }
-    } else {
-      if (customerCount < 1) {
-        position = Vector3.create(13.5, 0.75, 10.5)
-        seatNumber = 1
-      }
-    }
+  if (customerCount > 4) return
+
+
+  if (playerScore >= 350) {
+
+    if (customerCount < 1) {
+      position = position1
+      seatNumber = 1
+    } else if (customerCount < 2) {
+      position = position2
+      seatNumber = 2
+    } else if (customerCount < 3) {
+      position = position3
+      seatNumber = 3
+    } else if (customerCount < 4) {
+      position = position4
+      seatNumber = 4
+    } else return
+  } else if (playerScore >= 100) {
+    if (customerCount < 1) {
+      position = position1
+      seatNumber = 1
+    } else if (customerCount < 2) {
+      position = position2
+      seatNumber = 2
+    } else return
+  } else {
+    if (customerCount < 1) {
+      position = position1
+      seatNumber = 1
+    } else return
   }
+
 
   for (const [cust] of customers) {
     const customerData = CustomerData.getMutable(cust)
