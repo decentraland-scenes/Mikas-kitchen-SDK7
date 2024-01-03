@@ -1,5 +1,5 @@
-import { Entity, Material, engine, Transform, TextShape, MeshRenderer, TextAlignMode } from "@dcl/sdk/ecs";
-import { SpeechBubbleType } from "../definitions";
+import { Entity, Material, engine, Transform, TextShape, MeshRenderer, TextAlignMode, VisibilityComponent } from "@dcl/sdk/ecs";
+import { SpeechBubbleType, SyncEntityIDs } from "../definitions";
 import { Color4, Vector3, Quaternion } from "@dcl/ecs-math";
 import { syncEntity, parentEntity, getChildren } from '@dcl/sdk/network'
 import { getSyncId } from "./helpers";
@@ -13,15 +13,42 @@ const bubble3Texture = Material.Texture.Common({
 })
 
 
-export function createSpeechBubble(parent: Entity, text: string, height?: number, bubbleType?: SpeechBubbleType) {
+export function createSpeechBubble(parent: Entity, seatNumber: number, text: string, height?: number, bubbleType?: SpeechBubbleType) {
+
+
+  let bubbleParentId = SyncEntityIDs.BUBBLE1_A
+  let backgroundId = SyncEntityIDs.BUBBLE1_B
+  let textId = SyncEntityIDs.BUBBLE1_C
+
+  switch (seatNumber) {
+    case 1:
+      bubbleParentId = SyncEntityIDs.BUBBLE1_A
+      backgroundId = SyncEntityIDs.BUBBLE1_B
+      textId = SyncEntityIDs.BUBBLE1_C
+      break;
+    case 2:
+      bubbleParentId = SyncEntityIDs.BUBBLE2_A
+      backgroundId = SyncEntityIDs.BUBBLE2_B
+      textId = SyncEntityIDs.BUBBLE2_C
+      break;
+    case 3:
+      bubbleParentId = SyncEntityIDs.BUBBLE3_A
+      backgroundId = SyncEntityIDs.BUBBLE3_B
+      textId = SyncEntityIDs.BUBBLE3_C
+      break;
+    case 4:
+      bubbleParentId = SyncEntityIDs.BUBBLE4_A
+      backgroundId = SyncEntityIDs.BUBBLE4_B
+      textId = SyncEntityIDs.BUBBLE4_C
+      break;
+  }
+
 
   const bubbleParent = engine.addEntity()
   Transform.create(bubbleParent, {
     position: Vector3.create(-1, 0, 0),
     rotation: Quaternion.fromEulerDegrees(0, 180, 0)
   })
-
-  const bubbleParentId = getSyncId(bubbleParent)
 
 
   syncEntity(bubbleParent, [], bubbleParentId)
@@ -35,6 +62,8 @@ export function createSpeechBubble(parent: Entity, text: string, height?: number
     rotation: Quaternion.fromEulerDegrees(0, 0, 0)
   })
   MeshRenderer.setPlane(background)
+
+  VisibilityComponent.createOrReplace(background, { visible: false })
 
 
   let texture = bubble1Texture
@@ -57,9 +86,7 @@ export function createSpeechBubble(parent: Entity, text: string, height?: number
 
   })
 
-  const backgroundParentId = getSyncId(background)
-
-  syncEntity(background, [Material.componentId, Transform.componentId], backgroundParentId)
+  syncEntity(background, [Material.componentId, Transform.componentId, VisibilityComponent.componentId], backgroundId)
   parentEntity(background, bubbleParent)
 
   const textEntity = engine.addEntity()
@@ -78,10 +105,11 @@ export function createSpeechBubble(parent: Entity, text: string, height?: number
     fontSize: 1,
   })
 
-  const textParentId = getSyncId(textEntity)
+  //const textParentId = getSyncId(textEntity)
 
+  VisibilityComponent.createOrReplace(textEntity, { visible: false })
 
-  syncEntity(textEntity, [TextShape.componentId, Transform.componentId], textParentId)
+  syncEntity(textEntity, [TextShape.componentId, Transform.componentId, VisibilityComponent.componentId], textId)
   parentEntity(textEntity, bubbleParent)
 
 
@@ -100,6 +128,7 @@ export function updateSpeechBubble(bubble: Entity, text: string, bubbleType?: Sp
   let textEntity: Entity | undefined = undefined
 
   for (const ent of children) {
+    VisibilityComponent.deleteFrom(ent)
     if (TextShape.has(ent)) {
       textEntity = ent
     }
@@ -133,6 +162,17 @@ export function updateSpeechBubble(bubble: Entity, text: string, bubbleType?: Sp
 
   TextShape.getMutable(textEntity).text = text
 
+
+}
+
+
+export function HideSpeechBubble(bubble: Entity) {
+
+  const children = Array.from(getChildren(bubble))
+
+  for (const ent of children) {
+    VisibilityComponent.createOrReplace(ent, { visible: false })
+  }
 
 }
 

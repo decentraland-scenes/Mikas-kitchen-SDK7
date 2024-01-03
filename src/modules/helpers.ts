@@ -51,9 +51,7 @@ export function getSyncId(entity: Entity) {
 
   let takenIds: number[] = []
 
-  const syncedEntites = engine.getEntitiesWith(DynamicSyncId)
-
-  for (const [ent] of syncedEntites) {
+  for (const [ent] of engine.getEntitiesWith(DynamicSyncId)) {
 
     takenIds.push(DynamicSyncId.get(ent).id)
   }

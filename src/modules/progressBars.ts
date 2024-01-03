@@ -1,11 +1,11 @@
-import { Entity, Transform, MeshRenderer, Material, TransformType, engine } from "@dcl/sdk/ecs";
+import { Entity, Transform, MeshRenderer, Material, TransformType, engine, VisibilityComponent } from "@dcl/sdk/ecs";
 import { ProgressBar } from "../definitions";
 import { Color4, Vector3, Quaternion, Scalar } from "@dcl/sdk/math";
 import { getParent, parentEntity, syncEntity } from "@dcl/sdk/network";
 import { getSyncId } from "./helpers";
 
 
-export function CreateProgressBar(parent: Entity, height?: number, yRotation?: number, movesUp?: boolean, speed?: number) {
+export function CreateProgressBar(parent: Entity, height?: number, yRotation?: number, movesUp?: boolean, startHidden?: boolean, speed?: number, id1?: number, id2?: number) {
 
   const background = engine.addEntity()
   Transform.create(background, {
@@ -15,9 +15,12 @@ export function CreateProgressBar(parent: Entity, height?: number, yRotation?: n
   })
   MeshRenderer.setPlane(background)
 
-  const backgroundId = getSyncId(background)
+  if (!id1) {
+    id1 = getSyncId(background)
+  }
 
-  syncEntity(background, [Transform.componentId], backgroundId)
+
+  syncEntity(background, [Transform.componentId, VisibilityComponent.componentId], id1)
   parentEntity(background, parent)
 
   const progressBar = engine.addEntity()
@@ -35,15 +38,24 @@ export function CreateProgressBar(parent: Entity, height?: number, yRotation?: n
     movesUp: movesUp,
     ratio: movesUp ? 0 : 1,
     redWarning: movesUp ? 0.8 : 0.2,
-    speed: speed ? speed : 1
+    speed: speed ? speed : 1,
+    visible: startHidden ? false : true,
+    active: startHidden ? false : true,
   })
 
-  const progressBarId = getSyncId(progressBar)
+  if (!id2) {
+    id2 = getSyncId(progressBar)
+  }
 
 
-  syncEntity(progressBar, [Transform.componentId, Material.componentId], progressBarId)
+  syncEntity(progressBar, [Transform.componentId, Material.componentId, VisibilityComponent.componentId], id2)
   parentEntity(progressBar, background)
 
+  if (startHidden) {
+    VisibilityComponent.create(background, { visible: false })
+    VisibilityComponent.create(progressBar, { visible: false })
+
+  }
 
 
 
@@ -130,14 +142,51 @@ export function changeBarColor(entity: Entity, color: Color4) {
 
 }
 
-export function RemoveProgressBar(entity: Entity) {
+export function HideProgressBar(entity: Entity) {
+  const progressBar = ProgressBar.getMutable(entity)
+  progressBar.visible = false
+  VisibilityComponent.createOrReplace(entity, { visible: false })
+
+  const parent = getParent(entity)
+  if (parent) {
+    VisibilityComponent.createOrReplace(parent, { visible: false })
+  }
+}
+
+
+export function ResetProgressBar(entity: Entity) {
   //TODO
   const parent = getParent(entity)
 
-  if (parent) {
-    engine.removeEntityWithChildren(parent)
+  const barData = ProgressBar.getMutable(entity)
+  barData.active = true
+  if (barData.movesUp) {
+    barData.ratio = 0
   } else {
-    engine.removeEntityWithChildren(entity)
+    barData.ratio = 1
+  }
+  barData.color = Color4.Green()
+  barData.visible = true
+
+  if (VisibilityComponent.has(entity)) {
+    VisibilityComponent.deleteFrom(entity)
   }
 
+  if (parent && VisibilityComponent.has(parent)) {
+    VisibilityComponent.deleteFrom(parent)
+  }
+
+  changeBarColor(entity, Color4.Green())
 }
+
+// export function RemoveProgressBar(entity: Entity) {
+//   //TODO
+//   const parent = getParent(entity)
+
+//   if (parent) {
+//     engine.removeEntityWithChildren(parent)
+//   } else {
+//     engine.removeEntityWithChildren(entity)
+//   }
+
+// }

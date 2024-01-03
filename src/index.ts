@@ -83,10 +83,6 @@ export function main() {
   }
 
 
-
-
-
-
   // Pots
   const pot1 = engine.getEntityOrNullByName("Pot1")
   const pot2 = engine.getEntityOrNullByName("Pot2")
@@ -95,8 +91,9 @@ export function main() {
 
 
   if (pot1 && pot2 && pot1_button && pot2_button) {
-    instancePot(pot1, SyncEntityIDs.POT1)
-    instancePot(pot2, SyncEntityIDs.POT2)
+    instancePot(pot1, SyncEntityIDs.POT1, SyncEntityIDs.PBAR5_A, SyncEntityIDs.PBAR5_B)
+    instancePot(pot2, SyncEntityIDs.POT2, SyncEntityIDs.PBAR6_A, SyncEntityIDs.PBAR6_B)
+
 
     const pot1_button_events = getTriggerEvents(pot1_button)
     pot1_button_events.on(TriggerType.ON_CLICK, () => {
@@ -207,6 +204,11 @@ export function main() {
     syncEntity(score, [TextShape.componentId], SyncEntityIDs.SCORE_TEXT)
     syncEntity(misses, [TextShape.componentId], SyncEntityIDs.MISSES_TEXT)
   }
+
+  CreateCustomer(1)
+  CreateCustomer(2)
+  CreateCustomer(3)
+  CreateCustomer(4)
 
 
 

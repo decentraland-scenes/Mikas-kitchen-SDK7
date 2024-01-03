@@ -2,7 +2,7 @@ import { engine, Animator, Entity, GltfContainer, PointerEvents, InputAction, Po
 import { PotData, SoupState, Cooking, SyncEntityIDs, IngredientType, GrabableObjectComponent } from '../definitions'
 import { pickUpItem } from "./pickAndDrop";
 import { syncEntity, parentEntity } from '@dcl/sdk/network'
-import { CreateProgressBar, RemoveProgressBar } from "./progressBars";
+import { CreateProgressBar, HideProgressBar, ResetProgressBar } from "./progressBars";
 
 
 const COOKED_AFTER: number = 5
@@ -11,9 +11,20 @@ const BURNT_AFTER: number = 10
 
 
 
-export function instancePot(pot: Entity, id: number) {
+export function instancePot(pot: Entity, id: number, pbid1: number, pbid2: number) {
 
-  PotData.create(pot)
+  syncEntity(
+    pot,
+    [Cooking.componentId, PotData.componentId],
+    id
+  )
+
+  const progressBar = CreateProgressBar(pot, 1, 270, true, true, 1, pbid1, pbid2)
+
+
+  PotData.create(pot, {
+    progressBar: progressBar,
+  })
 
   PointerEvents.create(pot, {
     pointerEvents: [
@@ -28,11 +39,7 @@ export function instancePot(pot: Entity, id: number) {
     ]
   })
 
-  syncEntity(
-    pot,
-    [Cooking.componentId, PotData.componentId],
-    id
-  )
+
 
 
 }
@@ -55,7 +62,7 @@ export function pickFood(pot: Entity) {
       Cooking.deleteFrom(pot)
     }
 
-    RemoveProgressBar(potData.progressBar)
+    HideProgressBar(potData.progressBar)
 
   }
 
@@ -69,7 +76,9 @@ export function startCooking(pot: Entity) {
 
   Cooking.createOrReplace(pot)
 
-  CreateProgressBar(pot, 1, 270, true)
+  PotData.getMutable(pot)
+
+  ResetProgressBar(PotData.getMutable(pot).progressBar)
 
 }
 
@@ -80,6 +89,7 @@ export function cookSystem(dt: number) {
     if (_cooking.active && _potData.hasIngredient) {
 
       const cooking = Cooking.getMutable(entity)
+
 
 
       cooking.time += dt
@@ -99,8 +109,6 @@ export function cookSystem(dt: number) {
         console.log("BURNING!!!")
 
         GltfContainer.getMutable(entity).src = "assets/models/CookingPotDirty.glb"
-
-
         const potData = PotData.getMutable(entity)
         potData.state = SoupState.Burned
         const food = potData.attachedEntity
@@ -110,6 +118,9 @@ export function cookSystem(dt: number) {
 
       }
 
+    } else if (_cooking.active && !_potData.hasIngredient) {
+      Cooking.deleteFrom(entity)
+      HideProgressBar(_potData.progressBar)
     }
   }
 }

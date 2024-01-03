@@ -15,9 +15,9 @@ import { playSound } from './helpers'
 import { currentPlayerId, getPlayerPosition } from './helpers'
 import { syncEntity, parentEntity, getParent, removeParent, getChildren } from '@dcl/sdk/network'
 import { ruinFood, switchToCutMode, switchToEmpty } from './cuttingBoard'
-import { RemoveProgressBar } from './progressBars'
 import { deliverOrder } from './customers'
 import { pickFood } from './pot'
+import { HideProgressBar } from './progressBars'
 
 export function pickingGlassSystem() {
   // DROP
@@ -174,6 +174,7 @@ export function pickUpItem(entity: Entity) {
     const pot = PotData.getMutable(oldParent)
     if (pot && pot.attachedEntity === entity) {
       pot.hasIngredient = false
+      HideProgressBar(pot.progressBar)
       //pot.attachedEntity = undefined
       pot.state = SoupState.Empty
 
