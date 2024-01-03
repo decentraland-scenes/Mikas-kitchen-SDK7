@@ -1,6 +1,6 @@
 import { GltfContainer, Animator, Transform, engine, Entity, TextShape, VisibilityComponent } from "@dcl/sdk/ecs"
 import { Vector3, Scalar, Quaternion, Color4 } from '@dcl/sdk/math'
-import { ProgressBar, CustomerData, IngredientType, SpeechBubbleType, BeerGlass, BeerType, GameData, SyncEntityIDs } from "../definitions";
+import { ProgressBar, CustomerData, IngredientType, SpeechBubbleType, BeerGlass, BeerType, GameData, SyncEntityIDs, GrabableObjectComponent } from "../definitions";
 import { CreateProgressBar, HideProgressBar, ResetProgressBar } from "./progressBars";
 import { HideSpeechBubble, RemoveSpeechBubble, createSpeechBubble, updateSpeechBubble } from "./speechBubble";
 import { syncEntity, parentEntity } from '@dcl/sdk/network'
@@ -455,6 +455,7 @@ export function deliverOrder(dishType: number, customer: Entity, dish?: Entity) 
         BeerGlass.getMutable(dish).beerType = BeerType.NONE
         Animator.playSingleAnimation(dish, "Blank")
         playSound("sounds/swallow.mp3", false, getPlayerPosition())
+        GrabableObjectComponent.getMutable(dish).type = IngredientType.BeerGlass
       } else {
         engine.removeEntity(dish)
       }
