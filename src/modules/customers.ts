@@ -1,8 +1,8 @@
-import { GltfContainer, Animator, Transform, engine, Entity, TextShape } from "@dcl/sdk/ecs"
+import { GltfContainer, Animator, Transform, engine, Entity, TextShape, VisibilityComponent } from "@dcl/sdk/ecs"
 import { Vector3, Scalar, Quaternion, Color4 } from '@dcl/sdk/math'
-import { ProgressBar, CustomerData, IngredientType, SpeechBubbleType, BeerGlass, BeerType, GameData } from "../definitions";
-import { CreateProgressBar, RemoveProgressBar } from "./progressBars";
-import { RemoveSpeechBubble, createSpeechBubble, updateSpeechBubble } from "./speechBubble";
+import { ProgressBar, CustomerData, IngredientType, SpeechBubbleType, BeerGlass, BeerType, GameData, SyncEntityIDs } from "../definitions";
+import { CreateProgressBar, HideProgressBar, ResetProgressBar } from "./progressBars";
+import { HideSpeechBubble, RemoveSpeechBubble, createSpeechBubble, updateSpeechBubble } from "./speechBubble";
 import { syncEntity, parentEntity } from '@dcl/sdk/network'
 import * as utils from '@dcl-sdk/utils'
 import { getPlayerPosition, playSound } from "./helpers";
@@ -110,79 +110,47 @@ const position2 = Vector3.create(13.5, 0.75, 11.5)
 const position3 = Vector3.create(13.5, 0.75, 12.5)
 const position4 = Vector3.create(13.5, 0.75, 13.5)
 
-// let playerScore: number = 0
-// let playerMisses: number = 0
-
-// let customerTimer: number = 2
-// let customerInterval: number = 10
 
 const ACCELERATION_RATE: number = 0.99
 
-export function CreateCustomer() {
+export function CreateCustomer(seatNumber: number) {
 
   const customer = engine.addEntity()
 
   let position: Vector3 = Vector3.Zero()
-  let takenSeats: number[] = []
+  let customerSyncId: SyncEntityIDs = SyncEntityIDs.CUSTOMER1
 
-  const [gameEntities] = engine.getEntitiesWith(GameData)
-  const gameEntity = gameEntities[0]
-  if (!gameEntity || !GameData.has(gameEntity)) return
-  const gameData = GameData.getMutable(gameEntity)
+  let progressBarIdA: SyncEntityIDs = SyncEntityIDs.PBAR1_A
+  let progressBarIdB: SyncEntityIDs = SyncEntityIDs.PBAR1_B
 
+  // TODO: dialog IDS
 
-
-  const customers = engine.getEntitiesWith(CustomerData)
-  let customerCount = 0;
-  for (const [customer] of customers) {
-    customerCount++;
-    takenSeats.push(CustomerData.get(customer).seatNumber)
+  switch (seatNumber) {
+    case 1:
+      position = position1;
+      customerSyncId = SyncEntityIDs.CUSTOMER1
+      progressBarIdA = SyncEntityIDs.PBAR1_A
+      progressBarIdB = SyncEntityIDs.PBAR1_B
+      break;
+    case 2:
+      position = position2;
+      customerSyncId = SyncEntityIDs.CUSTOMER2
+      progressBarIdA = SyncEntityIDs.PBAR2_A
+      progressBarIdB = SyncEntityIDs.PBAR2_B
+      break;
+    case 3:
+      position = position3;
+      customerSyncId = SyncEntityIDs.CUSTOMER3
+      progressBarIdA = SyncEntityIDs.PBAR3_A
+      progressBarIdB = SyncEntityIDs.PBAR3_B
+      break;
+    case 4:
+      position = position4;
+      customerSyncId = SyncEntityIDs.CUSTOMER4
+      progressBarIdA = SyncEntityIDs.PBAR4_A
+      progressBarIdB = SyncEntityIDs.PBAR4_B
+      break;
   }
-
-  let seatNumber: number = 0
-
-  if (customerCount > 4) return
-
-
-  if (gameData.playerScore >= 150) {
-    if (!takenSeats.includes(1)) {
-      position = position1
-      seatNumber = 1
-    } else if (!takenSeats.includes(2)) {
-      position = position2
-      seatNumber = 2
-    } else if (!takenSeats.includes(3)) {
-      position = position3
-      seatNumber = 3
-    } else if (!takenSeats.includes(4)) {
-      position = position4
-      seatNumber = 4
-    } else return
-
-  } else if (gameData.playerScore >= 50) {
-    console.log("CUSTOMER COUNT: ", customerCount, "TAKEN SEATS: ", takenSeats)
-    if (!takenSeats.includes(1)) {
-      position = position1
-      seatNumber = 1
-    } else if (!takenSeats.includes(2)) {
-      position = position2
-      seatNumber = 2
-    } else return
-  } else {
-    if (customerCount < 1) {
-      position = position1
-      seatNumber = 1
-    } else return
-  }
-
-
-  for (const [cust] of customers) {
-    const customerData = CustomerData.getMutable(cust)
-    if (customerData.seatNumber == seatNumber) {
-      seatNumber += 1
-    }
-  }
-  if (seatNumber > 4) { return }
 
 
 
@@ -199,11 +167,123 @@ export function CreateCustomer() {
   Animator.create(customer)
   Animator.playSingleAnimation(customer, "Sitting", false)
 
-  syncEntity(customer, [GltfContainer.componentId, Transform.componentId, CustomerData.componentId, Animator.componentId])
+  syncEntity(customer, [GltfContainer.componentId, Transform.componentId, CustomerData.componentId, Animator.componentId, VisibilityComponent.componentId], customerSyncId)
 
   const randomTime = Scalar.randomRange(3, 6)
 
-  const progressBar = CreateProgressBar(customer, 1.3, 180, false, 0.1)
+  const progressBar = CreateProgressBar(customer, 1.3, 180, false, true, 0.1, progressBarIdA, progressBarIdB)
+
+
+  const speechBubble = createSpeechBubble(customer, seatNumber, "Placeholder", 2.3)
+
+  CustomerData.create(customer, {
+    message: "placeHolder",
+    speechBubble: speechBubble,
+    receivedDish: false,
+    seatNumber: seatNumber,
+    //plate: CustomerPlate
+    timeBeforeLeaving: Scalar.randomRange(3, 4),
+    timeBeforeEntering: randomTime,
+    waitingTimer: randomTime,
+    progressBar: progressBar
+  })
+
+  VisibilityComponent.createOrReplace(customer, { visible: false })
+
+}
+
+export function summonCustomer() {
+  let takenSeats: number[] = []
+
+  const [gameEntities] = engine.getEntitiesWith(GameData)
+  const gameEntity = gameEntities[0]
+  if (!gameEntity || !GameData.has(gameEntity)) return
+  const gameData = GameData.getMutable(gameEntity)
+
+
+  let customerCount = 0;
+  for (const [customer] of engine.getEntitiesWith(CustomerData)) {
+    if (CustomerData.get(customer).active) {
+      customerCount++;
+      takenSeats.push(CustomerData.get(customer).seatNumber)
+    }
+  }
+
+  let seatNumber: number = 0
+
+  if (customerCount > 4) return
+
+
+  if (gameData.playerScore >= 150) {
+    if (!takenSeats.includes(1)) {
+      seatNumber = 1
+    } else if (!takenSeats.includes(2)) {
+      seatNumber = 2
+    } else if (!takenSeats.includes(3)) {
+      seatNumber = 3
+    } else if (!takenSeats.includes(4)) {
+      seatNumber = 4
+    } else return
+
+  } else if (gameData.playerScore >= 50) {
+    console.log("CUSTOMER COUNT: ", customerCount, "TAKEN SEATS: ", takenSeats)
+    if (!takenSeats.includes(1)) {
+      seatNumber = 1
+    } else if (!takenSeats.includes(2)) {
+      seatNumber = 2
+    } else return
+  } else {
+    if (customerCount < 1) {
+      seatNumber = 1
+    } else return
+  }
+
+  console.log("SUMMONING NEW CUSTOMER, SEAT NUMBER: ", seatNumber, "TAKEN SEATS ", takenSeats)
+
+  for (const [customer] of engine.getEntitiesWith(CustomerData)) {
+    console.log("ITERATING OVER CUSTOMERS")
+    if (CustomerData.get(customer).seatNumber == seatNumber) {
+      resetCustomer(customer)
+    }
+  }
+}
+
+
+export function hideCustomer(customer: Entity) {
+
+  VisibilityComponent.createOrReplace(customer, { visible: false })
+
+  const customerData = CustomerData.getMutable(customer)
+
+  console.log("HIDING CUSTOMER: ", customerData.seatNumber)
+
+
+  customerData.active = false
+  customerData.receivedDish = false
+
+  if (customerData.progressBar) {
+    HideProgressBar(customerData.progressBar)
+  }
+
+  HideSpeechBubble(customerData.speechBubble)
+
+}
+
+
+export function resetCustomer(customer: Entity) {
+
+  const customerData = CustomerData.getMutable(customer)
+
+  customerData.active = true
+  customerData.waitingTimer = 10
+  customerData.timeBeforeLeaving = 30
+  customerData.timeBeforeEntering = 10
+  customerData.receivedDish = false
+
+  VisibilityComponent.deleteFrom(customer)
+  Animator.playSingleAnimation(customer, "Sitting", false)
+
+  ResetProgressBar(customerData.progressBar)
 
   const dish = Math.floor(Scalar.randomRange(0, 9))
 
@@ -245,23 +325,17 @@ export function CreateCustomer() {
 
   let randomIndex = Math.floor(Scalar.randomRange(0, messages.length))
 
+  updateSpeechBubble(customerData.speechBubble, messages[randomIndex], SpeechBubbleType.Neutral)
 
 
-  const speechBubble = createSpeechBubble(customer, messages[randomIndex], 2.3)
+  console.log("NEW TEXT: ", messages[randomIndex])
 
-  CustomerData.create(customer, {
-    dish: dish,
-    message: messages[randomIndex],
-    speechBubble: speechBubble,
-    receivedDish: false,
-    seatNumber: seatNumber,
-    //plate: CustomerPlate
-    timeBeforeLeaving: Scalar.randomRange(3, 4),
-    timeBeforeEntering: randomTime,
-    waitingTimer: randomTime,
-    progressBar: progressBar
-  })
+  customerData.dish = dish
+  customerData.message = messages[randomIndex]
+
 }
+
+
 
 export function CustomerSystem(dt: number) {
 
@@ -270,7 +344,7 @@ export function CustomerSystem(dt: number) {
 
     const customerData = CustomerData.getMutable(entity)
 
-    if (customerData.progressBar && ProgressBar.has(customerData.progressBar)) {
+    if (customerData.active && customerData.progressBar && ProgressBar.has(customerData.progressBar)) {
 
       const progressBar = ProgressBar.getMutable(customerData.progressBar)
       if (progressBar.speed > 0 && progressBar.ratio <= 0) {
@@ -283,7 +357,7 @@ export function CustomerSystem(dt: number) {
 
         deliverOrder(wrongDish, entity)
 
-        RemoveProgressBar(customerData.progressBar)
+        HideProgressBar(customerData.progressBar)
 
       }
     }
@@ -293,10 +367,9 @@ export function CustomerSystem(dt: number) {
 
       if (customerData.waitingTimer <= 0) {
 
-        engine.removeEntityWithChildren(entity)
+        hideCustomer(entity)
 
-        // CreateCustomer()
-
+        //engine.removeEntityWithChildren(entity)
 
       }
 
@@ -313,7 +386,7 @@ export function CustomerSystem(dt: number) {
 
     gameData.customerTimer -= dt
     if (gameData.customerTimer <= 0) {
-      CreateCustomer()
+      summonCustomer()
       gameData.customerTimer = gameData.customerInterval
       gameData.customerInterval = gameData.customerInterval * ACCELERATION_RATE
       console.log("NEW CUSTOMER INTERVAL", gameData.customerInterval)
@@ -330,7 +403,7 @@ export function deliverOrder(dishType: number, customer: Entity, dish?: Entity) 
   if (customerData.receivedDish) return
 
   if (customerData.progressBar) {
-    RemoveProgressBar(customerData.progressBar)
+    HideProgressBar(customerData.progressBar)
   }
 
 
@@ -442,7 +515,7 @@ export function restartGame() {
 
   const customers = engine.getEntitiesWith(CustomerData)
   for (const [customer] of customers) {
-    engine.removeEntityWithChildren(customer)
+    hideCustomer(customer)
   }
 
   updateScore()

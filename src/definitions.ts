@@ -175,7 +175,6 @@ export const PotData = engine.defineComponent('Pot', {
   state: SoupState.Empty,
   hasIngredient: false,
   attachedEntity: undefined,
-  //progressBar: 0,
 })
 
 
@@ -183,20 +182,8 @@ export const GrabableObjectComponent = engine.defineComponent('GrabableObjectCom
   type: Schemas.EnumNumber<IngredientType>(IngredientType, IngredientType.Noodles),
   beingProcessed: Schemas.Boolean,
   processed: Schemas.Boolean,
-  // grabbed: Schemas.Boolean,
-  // falling: Schemas.Boolean,
-  // origin: Schemas.Number,
-  // target: Schemas.Number,
-  // fraction: Schemas.Number,
-  //progressBar: Schemas.Entity,
-  // attachedEntity: Schemas.Entity
 }, {
   type: IngredientType.Noodles,
-  // grabbed: false,
-  // falling: false,
-  // origin: 0.4,
-  // target: 0,
-  // fraction: 0
 })
 
 export const Cooking = engine.defineComponent('Cooking', {
@@ -229,6 +216,7 @@ export const CuttingBoard = engine.defineComponent('CuttingBoard', {
 
 
 export const ProgressBar = engine.defineComponent('ProgressBar', {
+  visible: Schemas.Boolean,
   active: Schemas.Boolean,
   ratio: Schemas.Number,
   yellowWarning: Schemas.Number,
@@ -239,6 +227,7 @@ export const ProgressBar = engine.defineComponent('ProgressBar', {
   speed: Schemas.Number,
   parent: Schemas.Entity
 }, {
+  visible: true,
   active: true,
   ratio: 0,
   yellowWarning: 0.5,
@@ -253,6 +242,7 @@ export const ProgressBar = engine.defineComponent('ProgressBar', {
 
 
 export const CustomerData = engine.defineComponent('CustomerData', {
+  active: Schemas.Boolean,
   dish: Schemas.EnumNumber<IngredientType>(IngredientType, IngredientType.Noodles),
   message: Schemas.String,
   speechBubble: Schemas.Entity,
@@ -264,6 +254,7 @@ export const CustomerData = engine.defineComponent('CustomerData', {
   waitingTimer: Schemas.Number,
   progressBar: Schemas.Entity
 }, {
+  active: false,
   receivedDish: false,
   timeBeforeLeaving: 30,
   timeBeforeEntering: 10,
