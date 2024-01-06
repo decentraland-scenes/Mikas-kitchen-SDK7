@@ -427,8 +427,8 @@ export function deliverOrder(dishType: number, customer: Entity, dish?: Entity) 
 
     updateSpeechBubble(customerData.speechBubble, message, SpeechBubbleType.Good)
 
-    // const speechBubble = createSpeechBubble(customer, message, 2.3, SpeechBubbleType.Good)
-    // customerData.speechBubble = speechBubble
+    //playSound("sounds/error.mp3", false, getPlayerPosition())
+
 
   } else {
     // Wrong dish
@@ -438,6 +438,18 @@ export function deliverOrder(dishType: number, customer: Entity, dish?: Entity) 
     customerData.message = message
 
     updateSpeechBubble(customerData.speechBubble, message, SpeechBubbleType.Bad)
+
+    playSound("sounds/error.mp3", false, getPlayerPosition())
+
+    if (gameData.playerMisses <= 3) {
+
+      utils.timers.setTimeout(() => {
+        restartGame()
+
+      }, 1000)
+
+
+    }
 
     // const speechBubble = createSpeechBubble(customer, message, 2.3, SpeechBubbleType.Bad)
     // customerData.speechBubble = speechBubble
@@ -518,6 +530,8 @@ export function restartGame() {
   for (const [customer] of customers) {
     hideCustomer(customer)
   }
+
+  playSound("sounds/error.mp3", false, getPlayerPosition())
 
   updateScore()
   updateMisses()

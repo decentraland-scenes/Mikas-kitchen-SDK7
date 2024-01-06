@@ -2,7 +2,7 @@
   "ecs7": true,
   "runtimeVersion": "7",
   "display": {
-    "title": "beer-dispenser",
+    "title": "Mika's Kitchen",
     "favicon": "favicon_asset"
   },
   "contact": {
@@ -38,5 +38,8 @@
       }
     }
   ],
+  "worldConfiguration": {
+    "name": "MaximoCossetti.dcl.eth"
+  },
   "name": "beer-dispenser"
 }
