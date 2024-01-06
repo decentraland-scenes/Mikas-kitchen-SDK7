@@ -169,7 +169,7 @@ export function CreateCustomer(seatNumber: number) {
 
   syncEntity(customer, [GltfContainer.componentId, Transform.componentId, CustomerData.componentId, Animator.componentId, VisibilityComponent.componentId], customerSyncId)
 
-  const randomTime = Scalar.randomRange(3, 6)
+  const randomTime = Scalar.randomRange(2, 4)
 
   const progressBar = CreateProgressBar(customer, 1.3, 180, false, true, 0.1, progressBarIdA, progressBarIdB)
 
@@ -182,8 +182,8 @@ export function CreateCustomer(seatNumber: number) {
     receivedDish: false,
     seatNumber: seatNumber,
     //plate: CustomerPlate
-    timeBeforeLeaving: Scalar.randomRange(3, 4),
-    timeBeforeEntering: randomTime,
+    timeBeforeLeaving: Scalar.randomRange(3, 5),
+    //timeBeforeEntering: randomTime,
     waitingTimer: randomTime,
     progressBar: progressBar
   })
@@ -275,9 +275,9 @@ export function resetCustomer(customer: Entity) {
   const customerData = CustomerData.getMutable(customer)
 
   customerData.active = true
-  customerData.waitingTimer = 10
-  customerData.timeBeforeLeaving = 30
-  customerData.timeBeforeEntering = 10
+  customerData.waitingTimer = 5
+  customerData.timeBeforeLeaving = Scalar.randomRange(3, 5)
+  //customerData.timeBeforeEntering = 10
   customerData.receivedDish = false
 
   VisibilityComponent.deleteFrom(customer)
