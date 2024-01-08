@@ -5,7 +5,7 @@ import {
   AvatarAttach, GltfContainer, PointerEvents, Tween, PointerEventType, TextShape, Transform, CameraModeArea, CameraType
 } from '@dcl/sdk/ecs'
 import { Vector3, Quaternion } from '@dcl/sdk/math'
-import { BeerType, IngredientType, SyncEntityIDs, SpeechBubbleType, GameData } from './definitions'
+import { BeerType, IngredientType, SyncEntityIDs, SpeechBubbleType, GameData, HighestID } from './definitions'
 import { pickingGlassSystem } from './modules/pickAndDrop'
 import { createCuttingBoard, createIngredient, createTap, instanceBeer } from './modules/factory'
 import { tapPumpSystem } from './modules/tap'
@@ -33,6 +33,11 @@ initAssetPacks(engine, pointerEventsSystem, {
 
 
 export function main() {
+
+  HighestID.create(engine.RootEntity, { id: 1000 })
+  syncEntity(engine.RootEntity, [HighestID.componentId], 9999999)
+
+
 
   const gameEntity = engine.addEntity()
   GameData.create(gameEntity, {})
@@ -220,4 +225,5 @@ export function main() {
 
   // UI with GitHub link
   setupUi()
+
 }

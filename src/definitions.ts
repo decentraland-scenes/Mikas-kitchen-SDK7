@@ -132,10 +132,13 @@ export function getTapData(tapBeerType: BeerType) {
  * Component Definitions
  */
 
-export const DynamicSyncId = engine.defineComponent('DynamicSyncId', {
+// export const DynamicSyncId = engine.defineComponent('DynamicSyncId', {
+//   id: Schemas.Number
+// })
+
+export const HighestID = engine.defineComponent('HighestID', {
   id: Schemas.Number
 })
-
 
 
 export const BeerGlass = engine.defineComponent('BeerGlass', {
