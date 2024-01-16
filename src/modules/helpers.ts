@@ -45,18 +45,3 @@ export function playSound(audio: string, loop: boolean = false, position?: Vecto
   return entity
 }
 
-
-
-export function getSyncId(entity: Entity) {
-
-  const highestId = HighestID.getMutable(engine.RootEntity)
-
-  const id = highestId.id + 1
-
-  highestId.id = id
-
-  console.log("CREATING SYNC ID", id)
-
-  return id
-
-}

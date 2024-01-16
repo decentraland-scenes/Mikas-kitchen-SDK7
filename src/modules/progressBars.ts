@@ -2,7 +2,6 @@ import { Entity, Transform, MeshRenderer, Material, TransformType, engine, Visib
 import { ProgressBar } from "../definitions";
 import { Color4, Vector3, Quaternion, Scalar } from "@dcl/sdk/math";
 import { getParent, parentEntity, syncEntity } from "@dcl/sdk/network";
-import { getSyncId } from "./helpers";
 
 
 export function CreateProgressBar(parent: Entity, height?: number, yRotation?: number, movesUp?: boolean, startHidden?: boolean, speed?: number, id1?: number, id2?: number) {
@@ -14,11 +13,6 @@ export function CreateProgressBar(parent: Entity, height?: number, yRotation?: n
     rotation: Quaternion.fromEulerDegrees(0, yRotation ? yRotation : 0, 0)
   })
   MeshRenderer.setPlane(background)
-
-  if (!id1) {
-    id1 = getSyncId(background)
-  }
-
 
   syncEntity(background, [Transform.componentId, VisibilityComponent.componentId], id1)
   parentEntity(background, parent)
@@ -42,10 +36,6 @@ export function CreateProgressBar(parent: Entity, height?: number, yRotation?: n
     visible: startHidden ? false : true,
     active: startHidden ? false : true,
   })
-
-  if (!id2) {
-    id2 = getSyncId(progressBar)
-  }
 
 
   syncEntity(progressBar, [Transform.componentId, Material.componentId, VisibilityComponent.componentId], id2)

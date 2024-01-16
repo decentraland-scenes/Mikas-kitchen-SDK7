@@ -34,8 +34,8 @@ initAssetPacks(engine, pointerEventsSystem, {
 
 export function main() {
 
-  HighestID.create(engine.RootEntity, { id: 1000 })
-  syncEntity(engine.RootEntity, [HighestID.componentId], 9999999)
+  HighestID.create(engine.RootEntity, { id: 1001 })
+  syncEntity(engine.RootEntity, [HighestID.componentId], 1000)
 
 
 
@@ -131,6 +131,12 @@ export function main() {
 
   }
 
+  // customers
+  CreateCustomer(1)
+  CreateCustomer(2)
+  CreateCustomer(3)
+  CreateCustomer(4)
+
 
 
 
@@ -189,9 +195,6 @@ export function main() {
   // createIngredient(IngredientType.SlicedSushi, Vector3.create(8.4, 0.8, 1.5))
   // createIngredient(IngredientType.CookedNoodles, Vector3.create(10.4, 0.8, 1.5))
 
-  // CreateCustomer()
-  // CreateCustomer()
-
   // camera modifiera area
   const cameraMod = engine.addEntity()
 
@@ -209,11 +212,6 @@ export function main() {
     syncEntity(score, [TextShape.componentId], SyncEntityIDs.SCORE_TEXT)
     syncEntity(misses, [TextShape.componentId], SyncEntityIDs.MISSES_TEXT)
   }
-
-  CreateCustomer(1)
-  CreateCustomer(2)
-  CreateCustomer(3)
-  CreateCustomer(4)
 
 
 
