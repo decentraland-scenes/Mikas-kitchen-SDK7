@@ -2,7 +2,6 @@ import { Entity, Material, engine, Transform, TextShape, MeshRenderer, TextAlign
 import { SpeechBubbleType, SyncEntityIDs } from "../definitions";
 import { Color4, Vector3, Quaternion } from "@dcl/ecs-math";
 import { syncEntity, parentEntity, getChildren } from '@dcl/sdk/network'
-import { getSyncId } from "./helpers";
 
 const bubble1Texture = Material.Texture.Common({
   src: 'assets/textures/bubble.png',
@@ -105,16 +104,12 @@ export function createSpeechBubble(parent: Entity, seatNumber: number, text: str
     fontSize: 1,
   })
 
-  //const textParentId = getSyncId(textEntity)
-
   VisibilityComponent.createOrReplace(textEntity, { visible: false })
 
   syncEntity(textEntity, [TextShape.componentId, Transform.componentId, VisibilityComponent.componentId], textId)
   parentEntity(textEntity, bubbleParent)
 
 
-
-  // TODO: Handle IDS for multiplayer
 
 
   return bubbleParent

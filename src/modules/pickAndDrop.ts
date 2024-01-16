@@ -85,7 +85,7 @@ export function pickingGlassSystem() {
       } else {
         // Table or  customer
 
-        // Only it's allowed to hold the beer in surface parallel to floor
+        // Only it's allowed to drop ingredients on a surface parallel to the floor
 
         const diff = Vector3.subtract(Vector3.Up(), tryToDropCommand.hit?.normalHit || Vector3.Zero())
         console.log("DROPPED ON TABLE ", Vector3.length(diff), tryToDropCommand.hit?.normalHit)
@@ -217,6 +217,8 @@ export function checkNearCustomer(entity: Entity) {
 
 
     deliverOrder(itemData.type, closestCustomer, entity)
+  } else {
+    console.log("NO CUSTOMER NEAR")
   }
 }
 

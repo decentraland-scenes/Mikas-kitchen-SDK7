@@ -197,13 +197,16 @@ export function summonCustomer() {
 
   const [gameEntities] = engine.getEntitiesWith(GameData)
   const gameEntity = gameEntities[0]
-  if (!gameEntity || !GameData.has(gameEntity)) return
+  if (!gameEntity || !GameData.has(gameEntity)) {
+    console.log("NO GAME ENTITY")
+    return
+  }
   const gameData = GameData.getMutable(gameEntity)
 
 
   let customerCount = 0;
   for (const [customer] of engine.getEntitiesWith(CustomerData)) {
-    if (CustomerData.get(customer).active) {
+    if (CustomerData.get(customer).active && CustomerData.get(customer).receivedDish == false) {
       customerCount++;
       takenSeats.push(CustomerData.get(customer).seatNumber)
     }
@@ -223,7 +226,10 @@ export function summonCustomer() {
       seatNumber = 3
     } else if (!takenSeats.includes(4)) {
       seatNumber = 4
-    } else return
+    } else {
+      console.log("FULLY STAFFED TABLES, customer count:", customerCount)
+      return
+    }
 
   } else if (gameData.playerScore >= 50) {
     console.log("CUSTOMER COUNT: ", customerCount, "TAKEN SEATS: ", takenSeats)
@@ -231,11 +237,17 @@ export function summonCustomer() {
       seatNumber = 1
     } else if (!takenSeats.includes(2)) {
       seatNumber = 2
-    } else return
+    } else {
+      console.log("FULLY STAFFED TABLES, customer count:", customerCount)
+      return
+    }
   } else {
     if (customerCount < 1) {
       seatNumber = 1
-    } else return
+    } else {
+      console.log("FULLY STAFFED TABLES, customer count:", customerCount)
+      return
+    }
   }
 
   console.log("SUMMONING NEW CUSTOMER, SEAT NUMBER: ", seatNumber, "TAKEN SEATS ", takenSeats)
@@ -281,7 +293,7 @@ export function resetCustomer(customer: Entity) {
   customerData.receivedDish = false
 
   VisibilityComponent.deleteFrom(customer)
-  Animator.playSingleAnimation(customer, "Sitting", false)
+  //Animator.playSingleAnimation(customer, "Sitting", false)
 
   ResetProgressBar(customerData.progressBar)
 

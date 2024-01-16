@@ -45,26 +45,3 @@ export function playSound(audio: string, loop: boolean = false, position?: Vecto
   return entity
 }
 
-
-
-export function getSyncId(entity: Entity) {
-
-  let takenIds: number[] = []
-
-  for (const [ent] of engine.getEntitiesWith(DynamicSyncId)) {
-
-    takenIds.push(DynamicSyncId.get(ent).id)
-  }
-
-  let id = 1000
-  while (takenIds.includes(id)) {
-    id++
-  }
-
-  console.log("CREATING SYNC ID", id)
-
-  DynamicSyncId.create(entity, { id: id })
-
-  return id
-
-}

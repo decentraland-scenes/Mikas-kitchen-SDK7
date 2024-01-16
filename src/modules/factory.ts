@@ -19,7 +19,7 @@ import { Vector3, Quaternion } from '@dcl/sdk/math'
 import { BeerGlass, BeerType, CuttingBoard, DynamicSyncId, getTapData, GrabableObjectComponent, IngredientType, SyncEntityIDs, TapBase, TapComponent } from '../definitions'
 import { syncEntity, parentEntity } from '@dcl/sdk/network'
 import { cutSushi } from './cuttingBoard'
-import { getSyncId } from './helpers'
+
 
 
 
@@ -115,11 +115,10 @@ export function createIngredient(ingredient: IngredientType, position: Vector3, 
     })
   }
 
-  let id = getSyncId(entity)
 
   syncEntity(
     entity,
-    [AudioSource.componentId, Transform.componentId, GrabableObjectComponent.componentId, Tween.componentId, GltfContainer.componentId, DynamicSyncId.componentId], id
+    [AudioSource.componentId, Transform.componentId, GrabableObjectComponent.componentId, Tween.componentId, GltfContainer.componentId, DynamicSyncId.componentId]
   )
 
   return ingredient
