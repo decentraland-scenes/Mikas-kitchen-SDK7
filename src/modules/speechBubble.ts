@@ -109,22 +109,6 @@ export function createSpeechBubble(parent: Entity, seatNumber: number, text: str
   syncEntity(background, [Material.componentId, Transform.componentId, VisibilityComponent.componentId], backgroundId)
   parentEntity(background, bubbleParent)
 
-  Transform.create(textEntity, {
-    position: Vector3.create(-1, height ? height - 0.1 : 0.9, -0.03),
-    scale: Vector3.create(0.85, 0.85, 0.85),
-    rotation: Quaternion.fromEulerDegrees(0, 0, 0)
-  })
-
-  TextShape.create(textEntity, {
-    text: text,
-    width: 1.1,
-    height: 1.1,
-    textAlign: TextAlignMode.TAM_MIDDLE_LEFT,
-    fontSize: 1,
-  })
-
-  VisibilityComponent.createOrReplace(textEntity, { visible: false })
-
   // text
   syncEntity(textEntity, [TextShape.componentId, Transform.componentId, VisibilityComponent.componentId], textId)
   parentEntity(textEntity, bubbleParent)

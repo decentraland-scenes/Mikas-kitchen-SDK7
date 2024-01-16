@@ -3,7 +3,9 @@
   "runtimeVersion": "7",
   "display": {
     "title": "Mika's Kitchen",
-    "favicon": "favicon_asset"
+    "description": "A dinner-dash style game. Serve foor or beer to the customers. Works as a multiplayer scene!",
+    "favicon": "favicon_asset",
+    "navmapThumbnail":"favicon_asset"
   },
   "contact": {
     "name": "author-name",
@@ -39,7 +41,7 @@
     }
   ],
   "worldConfiguration": {
-    "name": "MaximoCossetti.dcl.eth"
+    "name": "mikakitchen.dcl.eth"
   },
-  "name": "beer-dispenser"
+  "name": "mikas-kitchen"
 }

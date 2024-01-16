@@ -412,7 +412,7 @@ export function deliverOrder(dishType: number, customer: Entity, dish?: Entity) 
 
   const customerData = CustomerData.getMutable(customer)
 
-  if (customerData.receivedDish) return
+  if (!customerData.active || customerData.receivedDish) return
 
   if (customerData.progressBar) {
     HideProgressBar(customerData.progressBar)
@@ -444,6 +444,9 @@ export function deliverOrder(dishType: number, customer: Entity, dish?: Entity) 
 
   } else {
     // Wrong dish
+
+    console.log("WRONG DISH: ", dishType, " EXPECTED: ", customerData.dish)
+
     gameData.playerMisses += 1
     updateMisses()
     const message = customerWrongDishMessages[Math.floor(Scalar.randomRange(0, customerWrongDishMessages.length))]
@@ -477,9 +480,9 @@ export function deliverOrder(dishType: number, customer: Entity, dish?: Entity) 
 
         BeerGlass.getMutable(dish).filled = false
         BeerGlass.getMutable(dish).beerType = BeerType.NONE
+        GrabableObjectComponent.getMutable(dish).type = IngredientType.BeerGlass
         Animator.playSingleAnimation(dish, "Blank")
         playSound("sounds/swallow.mp3", false, getPlayerPosition())
-        GrabableObjectComponent.getMutable(dish).type = IngredientType.BeerGlass
       } else {
         engine.removeEntity(dish)
       }
