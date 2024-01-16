@@ -5,7 +5,7 @@ import {
   AvatarAttach, GltfContainer, PointerEvents, Tween, PointerEventType, TextShape, Transform, CameraModeArea, CameraType
 } from '@dcl/sdk/ecs'
 import { Vector3, Quaternion } from '@dcl/sdk/math'
-import { BeerType, IngredientType, SyncEntityIDs, SpeechBubbleType, GameData } from './definitions'
+import { BeerType, IngredientType, SyncEntityIDs, SpeechBubbleType, GameData, HighestID } from './definitions'
 import { pickingGlassSystem } from './modules/pickAndDrop'
 import { createCuttingBoard, createIngredient, createTap, instanceBeer } from './modules/factory'
 import { tapPumpSystem } from './modules/tap'
@@ -33,6 +33,11 @@ initAssetPacks(engine, pointerEventsSystem, {
 
 
 export function main() {
+
+  HighestID.create(engine.RootEntity, { id: 1001 })
+  syncEntity(engine.RootEntity, [HighestID.componentId], 1000)
+
+
 
   const gameEntity = engine.addEntity()
   GameData.create(gameEntity, {})
@@ -126,6 +131,12 @@ export function main() {
 
   }
 
+  // customers
+  CreateCustomer(1)
+  CreateCustomer(2)
+  CreateCustomer(3)
+  CreateCustomer(4)
+
 
 
 
@@ -184,9 +195,6 @@ export function main() {
   // createIngredient(IngredientType.SlicedSushi, Vector3.create(8.4, 0.8, 1.5))
   // createIngredient(IngredientType.CookedNoodles, Vector3.create(10.4, 0.8, 1.5))
 
-  // CreateCustomer()
-  // CreateCustomer()
-
   // camera modifiera area
   const cameraMod = engine.addEntity()
 
@@ -205,11 +213,6 @@ export function main() {
     syncEntity(misses, [TextShape.componentId], SyncEntityIDs.MISSES_TEXT)
   }
 
-  CreateCustomer(1)
-  CreateCustomer(2)
-  CreateCustomer(3)
-  CreateCustomer(4)
-
 
 
   engine.addSystem(pickingGlassSystem)
@@ -220,4 +223,5 @@ export function main() {
 
   // UI with GitHub link
   setupUi()
+
 }

@@ -101,8 +101,12 @@ export function cookSystem(dt: number) {
         const potData = PotData.getMutable(entity)
         potData.state = SoupState.Cooked
         const food = potData.attachedEntity
-        GltfContainer.getMutable(food).src = "assets/models/PlateNoodles.glb"
-        GrabableObjectComponent.getMutable(food).type = IngredientType.CookedNoodles
+        if (GltfContainer.has(food)) {
+          GltfContainer.getMutable(food).src = "assets/models/PlateNoodles.glb"
+        }
+        if (GrabableObjectComponent.has(food)) {
+          GrabableObjectComponent.getMutable(food).type = IngredientType.CookedNoodles
+        }
 
       } else if (cooking.time > BURNT_AFTER && _potData.state === SoupState.Cooked) {
 
@@ -112,9 +116,12 @@ export function cookSystem(dt: number) {
         const potData = PotData.getMutable(entity)
         potData.state = SoupState.Burned
         const food = potData.attachedEntity
-        GltfContainer.getMutable(food).src = "assets/models/GarbageFood.glb"
-        GrabableObjectComponent.getMutable(food).type = IngredientType.Trash
-
+        if (GltfContainer.has(food)) {
+          GltfContainer.getMutable(food).src = "assets/models/GarbageFood.glb"
+        }
+        if (GrabableObjectComponent.has(food)) {
+          GrabableObjectComponent.getMutable(food).type = IngredientType.Trash
+        }
 
       }
 
