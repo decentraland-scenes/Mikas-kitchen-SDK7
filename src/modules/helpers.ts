@@ -1,7 +1,7 @@
 import { Transform, engine, executeTask, Entity, Animator, AudioSource } from '@dcl/sdk/ecs'
 import { Vector3 } from '@dcl/sdk/math'
 import { getUserData } from '~system/UserIdentity'
-import { DynamicSyncId } from '../definitions'
+import { HighestID } from '../definitions'
 
 export function getPlayerPosition() {
   return Transform.getOrNull(engine.PlayerEntity)?.position || Vector3.create()

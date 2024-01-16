@@ -50,10 +50,6 @@ export function createSpeechBubble(parent: Entity, seatNumber: number, text: str
   })
 
 
-  syncEntity(bubbleParent, [], bubbleParentId)
-  parentEntity(bubbleParent, parent)
-
-
   const background = engine.addEntity()
   Transform.create(background, {
     position: Vector3.create(-0.6, height ? height - 0.35 : 0.65, 0),
@@ -63,6 +59,25 @@ export function createSpeechBubble(parent: Entity, seatNumber: number, text: str
   MeshRenderer.setPlane(background)
 
   VisibilityComponent.createOrReplace(background, { visible: false })
+
+
+  const textEntity = engine.addEntity()
+
+  Transform.create(textEntity, {
+    position: Vector3.create(-1, height ? height - 0.1 : 0.9, -0.03),
+    scale: Vector3.create(0.85, 0.85, 0.85),
+    rotation: Quaternion.fromEulerDegrees(0, 0, 0)
+  })
+
+  TextShape.create(textEntity, {
+    text: text,
+    width: 1.1,
+    height: 1.1,
+    textAlign: TextAlignMode.TAM_MIDDLE_LEFT,
+    fontSize: 1,
+  })
+
+  VisibilityComponent.createOrReplace(textEntity, { visible: false })
 
 
   let texture = bubble1Texture
@@ -85,10 +100,14 @@ export function createSpeechBubble(parent: Entity, seatNumber: number, text: str
 
   })
 
+
+  //parent
+  syncEntity(bubbleParent, [], bubbleParentId)
+  parentEntity(bubbleParent, parent)
+
+  // background
   syncEntity(background, [Material.componentId, Transform.componentId, VisibilityComponent.componentId], backgroundId)
   parentEntity(background, bubbleParent)
-
-  const textEntity = engine.addEntity()
 
   Transform.create(textEntity, {
     position: Vector3.create(-1, height ? height - 0.1 : 0.9, -0.03),
@@ -106,10 +125,9 @@ export function createSpeechBubble(parent: Entity, seatNumber: number, text: str
 
   VisibilityComponent.createOrReplace(textEntity, { visible: false })
 
+  // text
   syncEntity(textEntity, [TextShape.componentId, Transform.componentId, VisibilityComponent.componentId], textId)
   parentEntity(textEntity, bubbleParent)
-
-
 
 
   return bubbleParent

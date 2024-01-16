@@ -3,8 +3,6 @@ import { ProgressBar } from "../definitions";
 import { Color4, Vector3, Quaternion, Scalar } from "@dcl/sdk/math";
 import { getParent, parentEntity, syncEntity } from "@dcl/sdk/network";
 
-
-
 export function CreateProgressBar(parent: Entity, height?: number, yRotation?: number, movesUp?: boolean, startHidden?: boolean, speed?: number, id1?: number, id2?: number) {
 
   const background = engine.addEntity()
@@ -14,7 +12,6 @@ export function CreateProgressBar(parent: Entity, height?: number, yRotation?: n
     rotation: Quaternion.fromEulerDegrees(0, yRotation ? yRotation : 0, 0)
   })
   MeshRenderer.setPlane(background)
-
 
   syncEntity(background, [Transform.componentId, VisibilityComponent.componentId], id1)
   parentEntity(background, parent)

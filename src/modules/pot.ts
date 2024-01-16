@@ -107,6 +107,7 @@ export function cookSystem(dt: number) {
         }
 
 
+
       } else if (cooking.time > BURNT_AFTER && _potData.state === SoupState.Cooked) {
 
         console.log("BURNING!!!")
@@ -121,8 +122,6 @@ export function cookSystem(dt: number) {
           GltfContainer.getMutable(food).src = "assets/models/GarbageFood.glb"
           GrabableObjectComponent.getMutable(food).type = IngredientType.Trash
         }
-
-
 
       }
 
