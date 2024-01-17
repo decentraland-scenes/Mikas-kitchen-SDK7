@@ -4,8 +4,8 @@
   "display": {
     "title": "Mika's Kitchen",
     "description": "A dinner-dash style game. Serve foor or beer to the customers. Works as a multiplayer scene!",
-    "favicon": "favicon_asset",
-    "navmapThumbnail":"favicon_asset"
+    "favicon": "images/thumb.png",
+    "navmapThumbnail":"images/thumb.png"
   },
   "contact": {
     "name": "author-name",
