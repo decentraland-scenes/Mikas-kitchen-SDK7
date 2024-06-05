@@ -261,9 +261,9 @@
         "521": {
           "json": {
             "position": {
-              "x": 16.46424102783203,
+              "x": 16.459999084472656,
               "y": 0.7099999785423279,
-              "z": 14.05458927154541
+              "z": 14.050000190734863
             },
             "scale": {
               "x": 1,
@@ -271,10 +271,10 @@
               "z": 1
             },
             "rotation": {
-              "x": -0.5,
-              "y": -0.5,
-              "z": 0.5,
-              "w": 0.5
+              "x": 0.5,
+              "y": 0.5,
+              "z": -0.5,
+              "w": -0.5
             },
             "parent": 0
           }
@@ -676,472 +676,6 @@
               "w": 4.329780632585522e-17
             },
             "parent": 0
-          }
-        }
-      }
-    },
-    {
-      "name": "core::GltfContainer",
-      "jsonSchema": {
-        "type": "object",
-        "properties": {},
-        "serializationType": "protocol-buffer",
-        "protocolBuffer": "PBGltfContainer"
-      },
-      "data": {
-        "513": {
-          "json": {
-            "src": "assets/models/Environment.glb",
-            "visibleMeshesCollisionMask": 1,
-            "invisibleMeshesCollisionMask": 2
-          }
-        },
-        "514": {
-          "json": {
-            "src": "assets/models/ExpenderNoodles.glb",
-            "visibleMeshesCollisionMask": 1,
-            "invisibleMeshesCollisionMask": 2
-          }
-        },
-        "515": {
-          "json": {
-            "src": "assets/models/ExpenderRolls.glb",
-            "visibleMeshesCollisionMask": 1,
-            "invisibleMeshesCollisionMask": 2
-          }
-        },
-        "516": {
-          "json": {
-            "src": "assets/models/CookingPotClean.glb",
-            "visibleMeshesCollisionMask": 1,
-            "invisibleMeshesCollisionMask": 2
-          }
-        },
-        "517": {
-          "json": {
-            "src": "assets/models/CookingPotClean.glb",
-            "visibleMeshesCollisionMask": 1,
-            "invisibleMeshesCollisionMask": 2
-          }
-        },
-        "518": {
-          "json": {
-            "src": "assets/builder/red_button/red_button.glb",
-            "visibleMeshesCollisionMask": 1,
-            "invisibleMeshesCollisionMask": 2
-          }
-        },
-        "519": {
-          "json": {
-            "src": "assets/builder/red_button/red_button.glb",
-            "visibleMeshesCollisionMask": 1,
-            "invisibleMeshesCollisionMask": 2
-          }
-        },
-        "520": {
-          "json": {
-            "src": "assets/builder/red_button/red_button.glb",
-            "visibleMeshesCollisionMask": 1,
-            "invisibleMeshesCollisionMask": 2
-          }
-        },
-        "521": {
-          "json": {
-            "src": "assets/builder/red_button/red_button.glb",
-            "visibleMeshesCollisionMask": 1,
-            "invisibleMeshesCollisionMask": 2
-          }
-        },
-        "522": {
-          "json": {
-            "src": "assets/models/beerGlass.glb",
-            "visibleMeshesCollisionMask": 1,
-            "invisibleMeshesCollisionMask": 2
-          }
-        },
-        "523": {
-          "json": {
-            "src": "assets/models/beerGlass.glb",
-            "visibleMeshesCollisionMask": 1,
-            "invisibleMeshesCollisionMask": 2
-          }
-        },
-        "524": {
-          "json": {
-            "src": "assets/models/beerGlass.glb",
-            "visibleMeshesCollisionMask": 1,
-            "invisibleMeshesCollisionMask": 2
-          }
-        },
-        "525": {
-          "json": {
-            "src": "assets/models/beerGlass.glb",
-            "visibleMeshesCollisionMask": 1,
-            "invisibleMeshesCollisionMask": 2
-          }
-        },
-        "526": {
-          "json": {
-            "src": "assets/models/beerGlass.glb",
-            "visibleMeshesCollisionMask": 1,
-            "invisibleMeshesCollisionMask": 2
-          }
-        },
-        "527": {
-          "json": {
-            "src": "assets/models/beerGlass.glb",
-            "visibleMeshesCollisionMask": 1,
-            "invisibleMeshesCollisionMask": 2
-          }
-        },
-        "528": {
-          "json": {
-            "src": "assets/models/beerGlass.glb",
-            "visibleMeshesCollisionMask": 1,
-            "invisibleMeshesCollisionMask": 2
-          }
-        },
-        "529": {
-          "json": {
-            "src": "assets/models/beerGlass.glb",
-            "visibleMeshesCollisionMask": 1,
-            "invisibleMeshesCollisionMask": 2
-          }
-        },
-        "530": {
-          "json": {
-            "src": "assets/models/beerGlass.glb",
-            "visibleMeshesCollisionMask": 1,
-            "invisibleMeshesCollisionMask": 2
-          }
-        },
-        "534": {
-          "json": {
-            "src": "assets/builder/concrete/FloorBaseConcrete_01/FloorBaseConcrete_01.glb",
-            "visibleMeshesCollisionMask": 1,
-            "invisibleMeshesCollisionMask": 2
-          }
-        },
-        "535": {
-          "json": {
-            "src": "assets/builder/concrete/FloorBaseConcrete_01/FloorBaseConcrete_01.glb",
-            "visibleMeshesCollisionMask": 1,
-            "invisibleMeshesCollisionMask": 2
-          }
-        },
-        "536": {
-          "json": {
-            "src": "assets/builder/concrete/FloorBaseConcrete_01/FloorBaseConcrete_01.glb",
-            "visibleMeshesCollisionMask": 1,
-            "invisibleMeshesCollisionMask": 2
-          }
-        },
-        "537": {
-          "json": {
-            "src": "assets/builder/concrete/FloorBaseConcrete_01/FloorBaseConcrete_01.glb",
-            "visibleMeshesCollisionMask": 1,
-            "invisibleMeshesCollisionMask": 2
-          }
-        },
-        "538": {
-          "json": {
-            "src": "assets/builder/red_light_button/red_scifi_button.glb",
-            "visibleMeshesCollisionMask": 1,
-            "invisibleMeshesCollisionMask": 2
-          }
-        },
-        "540": {
-          "json": {
-            "src": "assets/builder/arrow_sign/Arrow_Sign.glb",
-            "visibleMeshesCollisionMask": 1,
-            "invisibleMeshesCollisionMask": 2
-          }
-        },
-        "541": {
-          "json": {
-            "src": "assets/builder/arrow_sign/Arrow_Sign.glb",
-            "visibleMeshesCollisionMask": 1,
-            "invisibleMeshesCollisionMask": 2
-          }
-        }
-      }
-    },
-    {
-      "name": "core-schema::Name",
-      "jsonSchema": {
-        "type": "object",
-        "properties": {
-          "value": {
-            "type": "string",
-            "serializationType": "utf8-string"
-          }
-        },
-        "serializationType": "map"
-      },
-      "data": {
-        "513": {
-          "json": {
-            "value": "Environment.glb"
-          }
-        },
-        "514": {
-          "json": {
-            "value": "ExpenderNoodles"
-          }
-        },
-        "515": {
-          "json": {
-            "value": "ExpenderRolls"
-          }
-        },
-        "516": {
-          "json": {
-            "value": "Pot1"
-          }
-        },
-        "517": {
-          "json": {
-            "value": "Pot2"
-          }
-        },
-        "518": {
-          "json": {
-            "value": "Roll Button"
-          }
-        },
-        "519": {
-          "json": {
-            "value": "Noodle Button"
-          }
-        },
-        "520": {
-          "json": {
-            "value": "Pot1 Button"
-          }
-        },
-        "521": {
-          "json": {
-            "value": "Pot2 Button"
-          }
-        },
-        "522": {
-          "json": {
-            "value": "Beer1"
-          }
-        },
-        "523": {
-          "json": {
-            "value": "Beer2"
-          }
-        },
-        "524": {
-          "json": {
-            "value": "Beer3"
-          }
-        },
-        "525": {
-          "json": {
-            "value": "Beer4"
-          }
-        },
-        "526": {
-          "json": {
-            "value": "Beer5"
-          }
-        },
-        "527": {
-          "json": {
-            "value": "Beer6"
-          }
-        },
-        "528": {
-          "json": {
-            "value": "Beer7"
-          }
-        },
-        "529": {
-          "json": {
-            "value": "Beer8"
-          }
-        },
-        "530": {
-          "json": {
-            "value": "Beer9"
-          }
-        },
-        "531": {
-          "json": {
-            "value": "Score"
-          }
-        },
-        "532": {
-          "json": {
-            "value": "Misses"
-          }
-        },
-        "534": {
-          "json": {
-            "value": "Concrete"
-          }
-        },
-        "535": {
-          "json": {
-            "value": "Concrete"
-          }
-        },
-        "536": {
-          "json": {
-            "value": "Concrete"
-          }
-        },
-        "537": {
-          "json": {
-            "value": "Concrete"
-          }
-        },
-        "538": {
-          "json": {
-            "value": "Restart_Button"
-          }
-        },
-        "539": {
-          "json": {
-            "value": "Text"
-          }
-        },
-        "540": {
-          "json": {
-            "value": "Arrow Sign"
-          }
-        },
-        "541": {
-          "json": {
-            "value": "Arrow Sign"
-          }
-        }
-      }
-    },
-    {
-      "name": "core::TextShape",
-      "jsonSchema": {
-        "type": "object",
-        "properties": {},
-        "serializationType": "protocol-buffer",
-        "protocolBuffer": "PBTextShape"
-      },
-      "data": {
-        "531": {
-          "json": {
-            "text": "Score: 0",
-            "font": 2,
-            "fontSize": 6,
-            "fontAutoSize": false,
-            "textAlign": 4,
-            "width": 100,
-            "height": 100,
-            "paddingTop": 0,
-            "paddingRight": 0,
-            "paddingBottom": 0,
-            "paddingLeft": 0,
-            "lineSpacing": 0,
-            "lineCount": 1,
-            "textWrapping": false,
-            "shadowBlur": 0,
-            "shadowOffsetX": 0,
-            "shadowOffsetY": 0,
-            "outlineWidth": 0,
-            "shadowColor": {
-              "r": 1,
-              "g": 1,
-              "b": 1
-            },
-            "outlineColor": {
-              "r": 1,
-              "g": 1,
-              "b": 1
-            },
-            "textColor": {
-              "r": 1,
-              "g": 1,
-              "b": 1,
-              "a": 1
-            }
-          }
-        },
-        "532": {
-          "json": {
-            "text": "Misses: 0",
-            "font": 2,
-            "fontSize": 4,
-            "fontAutoSize": false,
-            "textAlign": 4,
-            "width": 100,
-            "height": 100,
-            "paddingTop": 0,
-            "paddingRight": 0,
-            "paddingBottom": 0,
-            "paddingLeft": 0,
-            "lineSpacing": 0,
-            "lineCount": 1,
-            "textWrapping": false,
-            "shadowBlur": 0,
-            "shadowOffsetX": 0,
-            "shadowOffsetY": 0,
-            "outlineWidth": 0,
-            "shadowColor": {
-              "r": 1,
-              "g": 1,
-              "b": 1
-            },
-            "outlineColor": {
-              "r": 1,
-              "g": 1,
-              "b": 1
-            },
-            "textColor": {
-              "r": 1,
-              "g": 0,
-              "b": 0,
-              "a": 1
-            }
-          }
-        },
-        "539": {
-          "json": {
-            "text": "Restart",
-            "font": 2,
-            "fontSize": 3,
-            "fontAutoSize": false,
-            "textAlign": 4,
-            "width": 100,
-            "height": 100,
-            "paddingTop": 0,
-            "paddingRight": 0,
-            "paddingBottom": 0,
-            "paddingLeft": 0,
-            "lineSpacing": 0,
-            "lineCount": 1,
-            "textWrapping": false,
-            "shadowBlur": 0,
-            "shadowOffsetX": 0,
-            "shadowOffsetY": 0,
-            "outlineWidth": 0,
-            "shadowColor": {
-              "r": 1,
-              "g": 1,
-              "b": 1
-            },
-            "outlineColor": {
-              "r": 1,
-              "g": 1,
-              "b": 1
-            },
-            "textColor": {
-              "r": 1,
-              "g": 1,
-              "b": 1,
-              "a": 1
-            }
           }
         }
       }
@@ -1570,6 +1104,347 @@
       }
     },
     {
+      "name": "core::GltfContainer",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {},
+        "serializationType": "protocol-buffer",
+        "protocolBuffer": "PBGltfContainer"
+      },
+      "data": {
+        "513": {
+          "json": {
+            "src": "assets/models/Environment.glb",
+            "visibleMeshesCollisionMask": 1,
+            "invisibleMeshesCollisionMask": 2
+          }
+        },
+        "514": {
+          "json": {
+            "src": "assets/models/ExpenderNoodles.glb",
+            "visibleMeshesCollisionMask": 1,
+            "invisibleMeshesCollisionMask": 2
+          }
+        },
+        "515": {
+          "json": {
+            "src": "assets/models/ExpenderRolls.glb",
+            "visibleMeshesCollisionMask": 1,
+            "invisibleMeshesCollisionMask": 2
+          }
+        },
+        "516": {
+          "json": {
+            "src": "assets/models/CookingPotClean.glb",
+            "visibleMeshesCollisionMask": 1,
+            "invisibleMeshesCollisionMask": 2
+          }
+        },
+        "517": {
+          "json": {
+            "src": "assets/models/CookingPotClean.glb",
+            "visibleMeshesCollisionMask": 1,
+            "invisibleMeshesCollisionMask": 2
+          }
+        },
+        "518": {
+          "json": {
+            "src": "assets/builder/red_button/red_button.glb",
+            "visibleMeshesCollisionMask": 1,
+            "invisibleMeshesCollisionMask": 2
+          }
+        },
+        "519": {
+          "json": {
+            "src": "assets/builder/red_button/red_button.glb",
+            "visibleMeshesCollisionMask": 1,
+            "invisibleMeshesCollisionMask": 2
+          }
+        },
+        "520": {
+          "json": {
+            "src": "assets/builder/red_button/red_button.glb",
+            "visibleMeshesCollisionMask": 1,
+            "invisibleMeshesCollisionMask": 2
+          }
+        },
+        "521": {
+          "json": {
+            "src": "assets/builder/red_button/red_button.glb",
+            "visibleMeshesCollisionMask": 1,
+            "invisibleMeshesCollisionMask": 2
+          }
+        },
+        "522": {
+          "json": {
+            "src": "assets/models/beerGlass.glb",
+            "visibleMeshesCollisionMask": 1,
+            "invisibleMeshesCollisionMask": 2
+          }
+        },
+        "523": {
+          "json": {
+            "src": "assets/models/beerGlass.glb",
+            "visibleMeshesCollisionMask": 1,
+            "invisibleMeshesCollisionMask": 2
+          }
+        },
+        "524": {
+          "json": {
+            "src": "assets/models/beerGlass.glb",
+            "visibleMeshesCollisionMask": 1,
+            "invisibleMeshesCollisionMask": 2
+          }
+        },
+        "525": {
+          "json": {
+            "src": "assets/models/beerGlass.glb",
+            "visibleMeshesCollisionMask": 1,
+            "invisibleMeshesCollisionMask": 2
+          }
+        },
+        "526": {
+          "json": {
+            "src": "assets/models/beerGlass.glb",
+            "visibleMeshesCollisionMask": 1,
+            "invisibleMeshesCollisionMask": 2
+          }
+        },
+        "527": {
+          "json": {
+            "src": "assets/models/beerGlass.glb",
+            "visibleMeshesCollisionMask": 1,
+            "invisibleMeshesCollisionMask": 2
+          }
+        },
+        "528": {
+          "json": {
+            "src": "assets/models/beerGlass.glb",
+            "visibleMeshesCollisionMask": 1,
+            "invisibleMeshesCollisionMask": 2
+          }
+        },
+        "529": {
+          "json": {
+            "src": "assets/models/beerGlass.glb",
+            "visibleMeshesCollisionMask": 1,
+            "invisibleMeshesCollisionMask": 2
+          }
+        },
+        "530": {
+          "json": {
+            "src": "assets/models/beerGlass.glb",
+            "visibleMeshesCollisionMask": 1,
+            "invisibleMeshesCollisionMask": 2
+          }
+        },
+        "534": {
+          "json": {
+            "src": "assets/builder/concrete/FloorBaseConcrete_01/FloorBaseConcrete_01.glb",
+            "visibleMeshesCollisionMask": 1,
+            "invisibleMeshesCollisionMask": 2
+          }
+        },
+        "535": {
+          "json": {
+            "src": "assets/builder/concrete/FloorBaseConcrete_01/FloorBaseConcrete_01.glb",
+            "visibleMeshesCollisionMask": 1,
+            "invisibleMeshesCollisionMask": 2
+          }
+        },
+        "536": {
+          "json": {
+            "src": "assets/builder/concrete/FloorBaseConcrete_01/FloorBaseConcrete_01.glb",
+            "visibleMeshesCollisionMask": 1,
+            "invisibleMeshesCollisionMask": 2
+          }
+        },
+        "537": {
+          "json": {
+            "src": "assets/builder/concrete/FloorBaseConcrete_01/FloorBaseConcrete_01.glb",
+            "visibleMeshesCollisionMask": 1,
+            "invisibleMeshesCollisionMask": 2
+          }
+        },
+        "538": {
+          "json": {
+            "src": "assets/builder/red_light_button/red_scifi_button.glb",
+            "visibleMeshesCollisionMask": 1,
+            "invisibleMeshesCollisionMask": 2
+          }
+        },
+        "540": {
+          "json": {
+            "src": "assets/builder/arrow_sign/Arrow_Sign.glb",
+            "visibleMeshesCollisionMask": 1,
+            "invisibleMeshesCollisionMask": 2
+          }
+        },
+        "541": {
+          "json": {
+            "src": "assets/builder/arrow_sign/Arrow_Sign.glb",
+            "visibleMeshesCollisionMask": 1,
+            "invisibleMeshesCollisionMask": 2
+          }
+        }
+      }
+    },
+    {
+      "name": "core-schema::Name",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "type": "string",
+            "serializationType": "utf8-string"
+          }
+        },
+        "serializationType": "map"
+      },
+      "data": {
+        "513": {
+          "json": {
+            "value": "Environment.glb"
+          }
+        },
+        "514": {
+          "json": {
+            "value": "ExpenderNoodles"
+          }
+        },
+        "515": {
+          "json": {
+            "value": "ExpenderRolls"
+          }
+        },
+        "516": {
+          "json": {
+            "value": "Pot1"
+          }
+        },
+        "517": {
+          "json": {
+            "value": "Pot2"
+          }
+        },
+        "518": {
+          "json": {
+            "value": "Roll Button"
+          }
+        },
+        "519": {
+          "json": {
+            "value": "Noodle Button"
+          }
+        },
+        "520": {
+          "json": {
+            "value": "Pot1 Button"
+          }
+        },
+        "521": {
+          "json": {
+            "value": "Pot2 Button"
+          }
+        },
+        "522": {
+          "json": {
+            "value": "Beer1"
+          }
+        },
+        "523": {
+          "json": {
+            "value": "Beer2"
+          }
+        },
+        "524": {
+          "json": {
+            "value": "Beer3"
+          }
+        },
+        "525": {
+          "json": {
+            "value": "Beer4"
+          }
+        },
+        "526": {
+          "json": {
+            "value": "Beer5"
+          }
+        },
+        "527": {
+          "json": {
+            "value": "Beer6"
+          }
+        },
+        "528": {
+          "json": {
+            "value": "Beer7"
+          }
+        },
+        "529": {
+          "json": {
+            "value": "Beer8"
+          }
+        },
+        "530": {
+          "json": {
+            "value": "Beer9"
+          }
+        },
+        "531": {
+          "json": {
+            "value": "Score"
+          }
+        },
+        "532": {
+          "json": {
+            "value": "Misses"
+          }
+        },
+        "534": {
+          "json": {
+            "value": "Concrete"
+          }
+        },
+        "535": {
+          "json": {
+            "value": "Concrete"
+          }
+        },
+        "536": {
+          "json": {
+            "value": "Concrete"
+          }
+        },
+        "537": {
+          "json": {
+            "value": "Concrete"
+          }
+        },
+        "538": {
+          "json": {
+            "value": "Restart_Button"
+          }
+        },
+        "539": {
+          "json": {
+            "value": "Text"
+          }
+        },
+        "540": {
+          "json": {
+            "value": "Arrow Sign"
+          }
+        },
+        "541": {
+          "json": {
+            "value": "Arrow Sign"
+          }
+        }
+      }
+    },
+    {
       "name": "core::PointerEvents",
       "jsonSchema": {
         "type": "object",
@@ -1746,6 +1621,131 @@
       }
     },
     {
+      "name": "core::TextShape",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {},
+        "serializationType": "protocol-buffer",
+        "protocolBuffer": "PBTextShape"
+      },
+      "data": {
+        "531": {
+          "json": {
+            "text": "Score: 0",
+            "font": 2,
+            "fontSize": 6,
+            "fontAutoSize": false,
+            "textAlign": 4,
+            "width": 100,
+            "height": 100,
+            "paddingTop": 0,
+            "paddingRight": 0,
+            "paddingBottom": 0,
+            "paddingLeft": 0,
+            "lineSpacing": 0,
+            "lineCount": 1,
+            "textWrapping": false,
+            "shadowBlur": 0,
+            "shadowOffsetX": 0,
+            "shadowOffsetY": 0,
+            "outlineWidth": 0,
+            "shadowColor": {
+              "r": 1,
+              "g": 1,
+              "b": 1
+            },
+            "outlineColor": {
+              "r": 1,
+              "g": 1,
+              "b": 1
+            },
+            "textColor": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            }
+          }
+        },
+        "532": {
+          "json": {
+            "text": "Misses: 0",
+            "font": 2,
+            "fontSize": 4,
+            "fontAutoSize": false,
+            "textAlign": 4,
+            "width": 100,
+            "height": 100,
+            "paddingTop": 0,
+            "paddingRight": 0,
+            "paddingBottom": 0,
+            "paddingLeft": 0,
+            "lineSpacing": 0,
+            "lineCount": 1,
+            "textWrapping": false,
+            "shadowBlur": 0,
+            "shadowOffsetX": 0,
+            "shadowOffsetY": 0,
+            "outlineWidth": 0,
+            "shadowColor": {
+              "r": 1,
+              "g": 1,
+              "b": 1
+            },
+            "outlineColor": {
+              "r": 1,
+              "g": 1,
+              "b": 1
+            },
+            "textColor": {
+              "r": 1,
+              "g": 0,
+              "b": 0,
+              "a": 1
+            }
+          }
+        },
+        "539": {
+          "json": {
+            "text": "Restart",
+            "font": 2,
+            "fontSize": 3,
+            "fontAutoSize": false,
+            "textAlign": 4,
+            "width": 100,
+            "height": 100,
+            "paddingTop": 0,
+            "paddingRight": 0,
+            "paddingBottom": 0,
+            "paddingLeft": 0,
+            "lineSpacing": 0,
+            "lineCount": 1,
+            "textWrapping": false,
+            "shadowBlur": 0,
+            "shadowOffsetX": 0,
+            "shadowOffsetY": 0,
+            "outlineWidth": 0,
+            "shadowColor": {
+              "r": 1,
+              "g": 1,
+              "b": 1
+            },
+            "outlineColor": {
+              "r": 1,
+              "g": 1,
+              "b": 1
+            },
+            "textColor": {
+              "r": 1,
+              "g": 1,
+              "b": 1,
+              "a": 1
+            }
+          }
+        }
+      }
+    },
+    {
       "name": "inspector::Selection",
       "jsonSchema": {
         "type": "object",
@@ -1758,9 +1758,86 @@
         "serializationType": "map"
       },
       "data": {
-        "538": {
+        "516": {
           "json": {
             "gizmo": 0
+          }
+        }
+      }
+    },
+    {
+      "name": "inspector::Scene",
+      "jsonSchema": {
+        "type": "object",
+        "properties": {
+          "layout": {
+            "type": "object",
+            "properties": {
+              "base": {
+                "type": "object",
+                "properties": {
+                  "x": {
+                    "type": "integer",
+                    "serializationType": "int32"
+                  },
+                  "y": {
+                    "type": "integer",
+                    "serializationType": "int32"
+                  }
+                },
+                "serializationType": "map"
+              },
+              "parcels": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "properties": {
+                    "x": {
+                      "type": "integer",
+                      "serializationType": "int32"
+                    },
+                    "y": {
+                      "type": "integer",
+                      "serializationType": "int32"
+                    }
+                  },
+                  "serializationType": "map"
+                },
+                "serializationType": "array"
+              }
+            },
+            "serializationType": "map"
+          }
+        },
+        "serializationType": "map"
+      },
+      "data": {
+        "0": {
+          "json": {
+            "layout": {
+              "base": {
+                "x": 0,
+                "y": 0
+              },
+              "parcels": [
+                {
+                  "x": 0,
+                  "y": 0
+                },
+                {
+                  "x": 0,
+                  "y": 1
+                },
+                {
+                  "x": 1,
+                  "y": 0
+                },
+                {
+                  "x": 1,
+                  "y": 1
+                }
+              ]
+            }
           }
         }
       }
@@ -2048,11 +2125,20 @@
           "json": {
             "name": "Mika's Kitchen",
             "description": "A dinner-dash style game. Serve foor or beer to the customers. Works as a multiplayer scene!",
-            "thumbnail": "images/thumb.png",
-            "categories": [],
-            "author": "author-name",
+            "thumbnail": "assets/scene/thumbnail.png",
+            "ageRating": "T",
+            "categories": [
+              "game"
+            ],
+            "author": "Pravus, NicoE, Mauri",
             "email": "",
-            "tags": [],
+            "tags": [
+              "kitchen",
+              "ramen",
+              "beer",
+              "NPCs",
+              "multiplayer"
+            ],
             "layout": {
               "parcels": [
                 {
@@ -2085,16 +2171,25 @@
                 "default": true,
                 "position": {
                   "x": {
-                    "$case": "single",
-                    "value": 0
+                    "$case": "range",
+                    "value": [
+                      -1,
+                      2
+                    ]
                   },
                   "y": {
-                    "$case": "single",
-                    "value": 0
+                    "$case": "range",
+                    "value": [
+                      0,
+                      0
+                    ]
                   },
                   "z": {
-                    "$case": "single",
-                    "value": 0
+                    "$case": "range",
+                    "value": [
+                      -1,
+                      2
+                    ]
                   }
                 },
                 "cameraTarget": {
@@ -2295,6 +2390,14 @@
               {
                 "entity": 541,
                 "children": []
+              },
+              {
+                "entity": 1,
+                "children": []
+              },
+              {
+                "entity": 2,
+                "children": []
               }
             ]
           }
@@ -2353,11 +2456,11 @@
               },
               {
                 "type": "increment_counter",
-                "jsonSchema": "{\"type\":\"object\",\"properties\":{},\"serializationType\":\"map\"}"
+                "jsonSchema": "{\"type\":\"object\",\"properties\":{\"amount\":{\"type\":\"integer\",\"serializationType\":\"optional\",\"optionalJsonSchema\":{\"type\":\"integer\",\"serializationType\":\"int32\"}}},\"serializationType\":\"map\"}"
               },
               {
                 "type": "decrease_counter",
-                "jsonSchema": "{\"type\":\"object\",\"properties\":{},\"serializationType\":\"map\"}"
+                "jsonSchema": "{\"type\":\"object\",\"properties\":{\"amount\":{\"type\":\"integer\",\"serializationType\":\"optional\",\"optionalJsonSchema\":{\"type\":\"integer\",\"serializationType\":\"int32\"}}},\"serializationType\":\"map\"}"
               },
               {
                 "type": "play_sound",
@@ -2454,6 +2557,62 @@
               {
                 "type": "hide_image",
                 "jsonSchema": "{\"type\":\"object\",\"properties\":{\"imageEntity\":{\"type\":\"integer\",\"serializationType\":\"optional\",\"optionalJsonSchema\":{\"type\":\"integer\",\"serializationType\":\"int32\"}}},\"serializationType\":\"map\"}"
+              },
+              {
+                "type": "damage",
+                "jsonSchema": "{\"type\":\"object\",\"properties\":{\"radius\":{\"type\":\"number\",\"serializationType\":\"float32\"},\"layer\":{\"type\":\"string\",\"serializationType\":\"optional\",\"optionalJsonSchema\":{\"type\":\"string\",\"enum\":[\"all\",\"player\",\"non_player\"],\"default\":\"all\",\"serializationType\":\"enum-string\",\"enumObject\":{\"ALL\":\"all\",\"PLAYER\":\"player\",\"NON_PLAYER\":\"non_player\"}}},\"hits\":{\"type\":\"integer\",\"serializationType\":\"optional\",\"optionalJsonSchema\":{\"type\":\"integer\",\"serializationType\":\"int32\"}}},\"serializationType\":\"map\"}"
+              },
+              {
+                "type": "move_player_here",
+                "jsonSchema": "{\"type\":\"object\",\"properties\":{},\"serializationType\":\"map\"}"
+              },
+              {
+                "type": "place_on_player",
+                "jsonSchema": "{\"type\":\"object\",\"properties\":{},\"serializationType\":\"map\"}"
+              },
+              {
+                "type": "rotate_as_player",
+                "jsonSchema": "{\"type\":\"object\",\"properties\":{},\"serializationType\":\"map\"}"
+              },
+              {
+                "type": "place_on_camera",
+                "jsonSchema": "{\"type\":\"object\",\"properties\":{},\"serializationType\":\"map\"}"
+              },
+              {
+                "type": "rotate_as_camera",
+                "jsonSchema": "{\"type\":\"object\",\"properties\":{},\"serializationType\":\"map\"}"
+              },
+              {
+                "type": "set_position",
+                "jsonSchema": "{\"type\":\"object\",\"properties\":{\"x\":{\"type\":\"number\",\"serializationType\":\"float32\"},\"y\":{\"type\":\"number\",\"serializationType\":\"float32\"},\"z\":{\"type\":\"number\",\"serializationType\":\"float32\"},\"relative\":{\"type\":\"boolean\",\"serializationType\":\"optional\",\"optionalJsonSchema\":{\"type\":\"boolean\",\"serializationType\":\"boolean\"}}},\"serializationType\":\"map\"}"
+              },
+              {
+                "type": "set_rotation",
+                "jsonSchema": "{\"type\":\"object\",\"properties\":{\"x\":{\"type\":\"number\",\"serializationType\":\"float32\"},\"y\":{\"type\":\"number\",\"serializationType\":\"float32\"},\"z\":{\"type\":\"number\",\"serializationType\":\"float32\"},\"relative\":{\"type\":\"boolean\",\"serializationType\":\"optional\",\"optionalJsonSchema\":{\"type\":\"boolean\",\"serializationType\":\"boolean\"}}},\"serializationType\":\"map\"}"
+              },
+              {
+                "type": "set_scale",
+                "jsonSchema": "{\"type\":\"object\",\"properties\":{\"x\":{\"type\":\"number\",\"serializationType\":\"float32\"},\"y\":{\"type\":\"number\",\"serializationType\":\"float32\"},\"z\":{\"type\":\"number\",\"serializationType\":\"float32\"},\"relative\":{\"type\":\"boolean\",\"serializationType\":\"optional\",\"optionalJsonSchema\":{\"type\":\"boolean\",\"serializationType\":\"boolean\"}}},\"serializationType\":\"map\"}"
+              },
+              {
+                "type": "follow_player",
+                "jsonSchema": "{\"type\":\"object\",\"properties\":{\"speed\":{\"type\":\"number\",\"serializationType\":\"float32\"},\"x\":{\"type\":\"boolean\",\"serializationType\":\"boolean\"},\"y\":{\"type\":\"boolean\",\"serializationType\":\"boolean\"},\"z\":{\"type\":\"boolean\",\"serializationType\":\"boolean\"},\"minDistance\":{\"type\":\"number\",\"serializationType\":\"float32\"}},\"serializationType\":\"map\"}"
+              },
+              {
+                "type": "stop_following_player",
+                "jsonSchema": "{\"type\":\"object\",\"properties\":{},\"serializationType\":\"map\"}"
+              },
+              {
+                "type": "random",
+                "jsonSchema": "{\"type\":\"object\",\"properties\":{\"actions\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"serializationType\":\"utf8-string\"},\"serializationType\":\"array\"}},\"serializationType\":\"map\"}"
+              },
+              {
+                "type": "batch",
+                "jsonSchema": "{\"type\":\"object\",\"properties\":{\"actions\":{\"type\":\"array\",\"items\":{\"type\":\"string\",\"serializationType\":\"utf8-string\"},\"serializationType\":\"array\"}},\"serializationType\":\"map\"}"
+              },
+              {
+                "type": "heal_player",
+                "jsonSchema": "{\"type\":\"object\",\"properties\":{\"multiplier\":{\"type\":\"integer\",\"serializationType\":\"int32\"}},\"serializationType\":\"map\"}"
               }
             ]
           }
@@ -2485,6 +2644,22 @@
                 "jsonPayload": {
                   "type": "string",
                   "serializationType": "utf8-string"
+                },
+                "allowedInBasicView": {
+                  "type": "boolean",
+                  "serializationType": "optional",
+                  "optionalJsonSchema": {
+                    "type": "boolean",
+                    "serializationType": "boolean"
+                  }
+                },
+                "basicViewId": {
+                  "type": "string",
+                  "serializationType": "optional",
+                  "optionalJsonSchema": {
+                    "type": "string",
+                    "serializationType": "utf8-string"
+                  }
                 }
               },
               "serializationType": "map"
@@ -2621,6 +2796,7 @@
                   "type": "string",
                   "enum": [
                     "on_click",
+                    "on_input_action",
                     "on_state_change",
                     "on_spawn",
                     "on_tween_end",
@@ -2630,12 +2806,20 @@
                     "on_delay",
                     "on_loop",
                     "on_clone",
-                    "on_click_image"
+                    "on_click_image",
+                    "on_damage",
+                    "on_global_click",
+                    "on_global_primary",
+                    "on_global_secondary",
+                    "on_tick",
+                    "on_heal_player",
+                    "on_player_spawn"
                   ],
-                  "default": "on_click",
+                  "default": "on_input_action",
                   "serializationType": "enum-string",
                   "enumObject": {
                     "ON_CLICK": "on_click",
+                    "ON_INPUT_ACTION": "on_input_action",
                     "ON_STATE_CHANGE": "on_state_change",
                     "ON_SPAWN": "on_spawn",
                     "ON_TWEEN_END": "on_tween_end",
@@ -2645,7 +2829,14 @@
                     "ON_DELAY": "on_delay",
                     "ON_LOOP": "on_loop",
                     "ON_CLONE": "on_clone",
-                    "ON_CLICK_IMAGE": "on_click_image"
+                    "ON_CLICK_IMAGE": "on_click_image",
+                    "ON_DAMAGE": "on_damage",
+                    "ON_GLOBAL_CLICK": "on_global_click",
+                    "ON_GLOBAL_PRIMARY": "on_global_primary",
+                    "ON_GLOBAL_SECONDARY": "on_global_secondary",
+                    "ON_TICK": "on_tick",
+                    "ON_HEAL_PLAYER": "on_heal_player",
+                    "ON_PLAYER_SPAWN": "on_player_spawn"
                   }
                 },
                 "conditions": {
@@ -2671,7 +2862,11 @@
                             "when_state_is_not",
                             "when_counter_equals",
                             "when_counter_is_greater_than",
-                            "when_counter_is_less_than"
+                            "when_counter_is_less_than",
+                            "when_distance_to_player_less_than",
+                            "when_distance_to_player_greater_than",
+                            "when_previous_state_is",
+                            "when_previous_state_is_not"
                           ],
                           "default": "when_state_is",
                           "serializationType": "enum-string",
@@ -2680,7 +2875,11 @@
                             "WHEN_STATE_IS_NOT": "when_state_is_not",
                             "WHEN_COUNTER_EQUALS": "when_counter_equals",
                             "WHEN_COUNTER_IS_GREATER_THAN": "when_counter_is_greater_than",
-                            "WHEN_COUNTER_IS_LESS_THAN": "when_counter_is_less_than"
+                            "WHEN_COUNTER_IS_LESS_THAN": "when_counter_is_less_than",
+                            "WHEN_DISTANCE_TO_PLAYER_LESS_THAN": "when_distance_to_player_less_than",
+                            "WHEN_DISTANCE_TO_PLAYER_GREATER_THAN": "when_distance_to_player_greater_than",
+                            "WHEN_PREVIOUS_STATE_IS": "when_previous_state_is",
+                            "WHEN_PREVIOUS_STATE_IS_NOT": "when_previous_state_is_not"
                           }
                         },
                         "value": {
@@ -2735,6 +2934,14 @@
                     "serializationType": "map"
                   },
                   "serializationType": "array"
+                },
+                "basicViewId": {
+                  "type": "string",
+                  "serializationType": "optional",
+                  "optionalJsonSchema": {
+                    "type": "string",
+                    "serializationType": "utf8-string"
+                  }
                 }
               },
               "serializationType": "map"
@@ -2947,83 +3154,6 @@
         },
         "541": {
           "json": {}
-        }
-      }
-    },
-    {
-      "name": "inspector::Scene",
-      "jsonSchema": {
-        "type": "object",
-        "properties": {
-          "layout": {
-            "type": "object",
-            "properties": {
-              "base": {
-                "type": "object",
-                "properties": {
-                  "x": {
-                    "type": "integer",
-                    "serializationType": "int32"
-                  },
-                  "y": {
-                    "type": "integer",
-                    "serializationType": "int32"
-                  }
-                },
-                "serializationType": "map"
-              },
-              "parcels": {
-                "type": "array",
-                "items": {
-                  "type": "object",
-                  "properties": {
-                    "x": {
-                      "type": "integer",
-                      "serializationType": "int32"
-                    },
-                    "y": {
-                      "type": "integer",
-                      "serializationType": "int32"
-                    }
-                  },
-                  "serializationType": "map"
-                },
-                "serializationType": "array"
-              }
-            },
-            "serializationType": "map"
-          }
-        },
-        "serializationType": "map"
-      },
-      "data": {
-        "0": {
-          "json": {
-            "layout": {
-              "base": {
-                "x": 0,
-                "y": 0
-              },
-              "parcels": [
-                {
-                  "x": 0,
-                  "y": 0
-                },
-                {
-                  "x": 0,
-                  "y": 1
-                },
-                {
-                  "x": 1,
-                  "y": 0
-                },
-                {
-                  "x": 1,
-                  "y": 1
-                }
-              ]
-            }
-          }
         }
       }
     },
