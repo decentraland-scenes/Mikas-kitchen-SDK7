@@ -10,7 +10,6 @@ import { pickingGlassSystem } from './modules/pickAndDrop'
 import { createCuttingBoard, createIngredient, createTap, instanceBeer } from './modules/factory'
 import { tapPumpSystem } from './modules/tap'
 import { setupUi } from './ui'
-import { initAssetPacks } from '@dcl/asset-packs/dist/scene-entrypoint'
 import { instancePot, startCooking, cookSystem } from './modules/pot'
 import { getTriggerEvents, getActionEvents } from '@dcl/asset-packs/dist/events'
 import { TriggerType } from '@dcl/asset-packs'
@@ -19,17 +18,6 @@ import { ProgressBarUpdate } from './modules/progressBars'
 import { createSpeechBubble } from './modules/speechBubble'
 import { CustomerSystem, CreateCustomer, restartGame } from './modules/customers'
 
-// You can remove this if you don't use any asset packs
-initAssetPacks(engine, pointerEventsSystem, {
-  Animator,
-  AudioSource,
-  AvatarAttach,
-  Transform,
-  VisibilityComponent,
-  GltfContainer,
-  Material,
-  VideoPlayer
-})
 
 
 export function main() {
@@ -72,7 +60,6 @@ export function main() {
       createIngredient(IngredientType.Noodles, startPosition, true)
 
     })
-
     const roll_button_events = getTriggerEvents(roll_button)
     roll_button_events.on(TriggerType.ON_CLICK, () => {
       console.log("BUTTON WAS PRESSED!!")
@@ -106,6 +93,7 @@ export function main() {
       startCooking(pot1)
     })
 
+
     const pot2_button_events = getTriggerEvents(pot2_button)
     pot2_button_events.on(TriggerType.ON_CLICK, () => {
       console.log("BUTTON WAS PRESSED!!")
@@ -126,6 +114,7 @@ export function main() {
     restart_event.on(TriggerType.ON_CLICK, () => {
       restartGame()
     })
+
 
     syncEntity(restart, [Animator.componentId, AudioSource.componentId], SyncEntityIDs.RESET_BUTTON)
 
